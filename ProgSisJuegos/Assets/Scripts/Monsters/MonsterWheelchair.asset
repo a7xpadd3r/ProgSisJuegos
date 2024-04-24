@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c49631592e731149b8eadc7a3b6097d, type: 3}
+  m_Name: MonsterWheelchair
+  m_EditorClassIdentifier: 
+  _life: 20
+  _movementSpeed: 1
+  _damageStunChance: 4
+  _attackChance: 8.5
+  _canMeleeAttack: 1
+  _attackRange: 1
+  _attackCooldown: 2.5
+  _rangedAttackChance: 0
+  _canRangedAttack: 0
+  _projectilePrefab: {fileID: 0}
+  _rangedAttackRange: 0
+  _rangedAttackCooldown: 0
+  _idleClips:
+  - {fileID: 8300000, guid: 1533151fece69e24cbd67aab032f6fe7, type: 3}
+  _movementClips:
+  - {fileID: 8300000, guid: b63c8bd237e88d34d9665a184c6136ef, type: 3}
+  - {fileID: 8300000, guid: 892c058091c371e45958fff42b7d4c14, type: 3}
+  - {fileID: 8300000, guid: bdb3eb813c536f8499e3a97194aece1d, type: 3}
+  - {fileID: 8300000, guid: 352bd3f5ecb05554695af2dc003c2409, type: 3}
+  _meleeAttackClips:
+  - {fileID: 8300000, guid: 2408b4204dee76d49a46c0784f1cfe82, type: 3}
+  - {fileID: 8300000, guid: 6e2753a1ce443024cb6e5415b4e59852, type: 3}
+  - {fileID: 8300000, guid: a184a09ecb3e3c448924abee32465b90, type: 3}
+  _rangedAttackClips: []
+  _damagedClips:
+  - {fileID: 8300000, guid: 536951d2357d15744a6a3f3522427a3a, type: 3}
+  - {fileID: 8300000, guid: 3df9310a323a29241bf954a88b0ee35b, type: 3}
+  - {fileID: 8300000, guid: abd9094c3e6cc66439942ea47e27946f, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: 17f19f6ab6dcb9f4492dee0e8462320f, type: 3}
