@@ -8,7 +8,7 @@ public class RockletsSpookySequence : MonoBehaviour
 {
     public List<GameObject> allTheSpookyWalls;
     public MonsterWheelchairBase wheelchairMonster;
-    public Image fadeImage;
+    public UIManager uiManager;
     public Transform teleportDestionationAfterSequence;
     public PlayerController thePlayer;
     public GameObject rockletsStuffToDestroy;
@@ -40,9 +40,8 @@ public class RockletsSpookySequence : MonoBehaviour
                 thePlayer.EDisableCController(false);
                 thePlayer.transform.position = new Vector3(teleportDestionationAfterSequence.position.x, thePlayer.transform.position.y, teleportDestionationAfterSequence.position.z);
                 thePlayer.EDisableCController(true);
-                
-                fadeImage.gameObject.SetActive(true);
-                fadeImage.CrossFadeColor(new Color(0, 0, 0, 0), 5, true, true);
+
+                uiManager.OnCameraFade(true, 0.5f, Color.white);
                 isSpookySequenceReady = false;                
                 
                 for (int i = 0; i < allTheSpookyWalls.Count; i++)

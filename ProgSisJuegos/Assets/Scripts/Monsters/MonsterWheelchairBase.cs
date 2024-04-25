@@ -24,7 +24,7 @@ public class MonsterWheelchairBase : MonsterBase, IDamageable
         _cController= this.GetComponent<CharacterController>();
     }
 
-    public void AnyDamage(float amount, bool isDamage = true)
+    public void AnyDamage(float amount)
     {
         if (_currentHealth > 0) 
         {
@@ -123,12 +123,6 @@ public class MonsterWheelchairBase : MonsterBase, IDamageable
                 transform.right = Vector3.LerpUnclamped(transform.right, lookDir, delta);
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(transform.position, MonsterData.AttackRange);
     }
 
     public bool IsAlive => _currentHealth > 0;

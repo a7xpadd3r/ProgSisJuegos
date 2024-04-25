@@ -14,7 +14,7 @@ public class KitchenKnifeToRockletsSequence : MonoBehaviour
     public GameObject fakeKnife;
 
     public Transform rocketsDestination;
-    public Image uiFadeImage;
+    public UIManager uiManager;
 
     [Header("Mini sequence")]
     public bool startFadeOut;
@@ -38,7 +38,7 @@ public class KitchenKnifeToRockletsSequence : MonoBehaviour
             else if (!noFadeSpam && timeBeforeFadeOut <= 0)
             {
                 noFadeSpam = true;
-                uiFadeImage.CrossFadeColor(new Color(0, 0, 0, 1), 1, true, true);
+                uiManager.OnCameraFade(false, 1, Color.black);
                 resumeGameplay = true;
             }
         }
@@ -52,7 +52,7 @@ public class KitchenKnifeToRockletsSequence : MonoBehaviour
             {
                 noSpamResume = true;
                 RestorePlayer();
-                uiFadeImage.CrossFadeColor(new Color(0, 0, 0, 0), 1, true, true);
+                uiManager.OnCameraFade(true, 1, Color.black);
             }
         }
     }
@@ -61,8 +61,7 @@ public class KitchenKnifeToRockletsSequence : MonoBehaviour
     {
         startFadeOut = true;
         // Start fade in
-        uiFadeImage.color = Color.black;
-        uiFadeImage.CrossFadeColor(new Color(0, 0, 0, 0), 3, true, true);
+        uiManager.OnCameraFade(true, 3, Color.black);
 
         // Disable player, activate camera, teleport to rocklets
         rockletCamera.gameObject.SetActive(true);

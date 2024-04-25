@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private bool _lIsPlayerEnabled = true;
 
+    public event Action<float> OnAnyDamage;
+
     private void Start()
     {
         _cController = GetComponent<CharacterController>();
@@ -139,14 +141,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         this._cController.enabled = isEnabled;
     }
 
-    public void AnyDamage(float amount, bool isDamage = true)
+    public void AnyDamage(float amount)
     {
-        // Fix triggering only once
-        _damagedOverlay.CrossFadeAlpha(0.2f, 0f, true);
-        _damagedOverlay.color = _damageColor;
-        //
-
-        _damagedOverlay.CrossFadeAlpha(0, 0.5f, true);
+        OnAnyDamage(amount);
         _currentLife -= amount;
 
         if (_currentLife <= 5) _heartBeatLoopSound.Play();

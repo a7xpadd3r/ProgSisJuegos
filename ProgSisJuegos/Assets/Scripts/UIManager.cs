@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,26 +6,54 @@ public class UIManager : MonoBehaviour
 {
     public Image fadeImage;
     public Image damageImage;
+    public PlayerController thePlayer;
 
-    public void Fade(bool fadeIn, float duration)
+    public Action<bool, float, Color> OnCameraFade;
+    public Action<Color> OnForcedQuickFade;
+
+    private void Start()
     {
+        OnCameraFade += Fade;
+        OnForcedQuickFade += SnapFade;
+        thePlayer.OnAnyDamage += DamageFade;
+    }
+
+    private void SnapFade(Color color)
+    {
+        fadeImage.gameObject.SetActive(false);
+        fadeImage.color = color;
+        fadeImage.gameObject.SetActive(true);
+        fadeImage.color = color;
+    }
+
+    private void Fade(bool fadeIn, float duration, Color color)
+    {
+        fadeImage.gameObject.SetActive(false);
+        fadeImage.color = color;
+        fadeImage.gameObject.SetActive(true);
+
         if (fadeIn)
         {
-            fadeImage.CrossFadeAlpha(1f, 0f, true);
+            fadeImage.CrossFadeAlpha(1, 0, true);
             fadeImage.CrossFadeAlpha(0, duration, true);
         }
         else
         {
-            fadeImage.CrossFadeAlpha(0, 0f, true);
+            fadeImage.CrossFadeAlpha(0, 0, true);
             fadeImage.CrossFadeAlpha(1f, duration, true);
         }
 
     }
 
-    public void DamageFade(Color color, float duration = 0.5f)
+    public void DamageFade(float amount)
     {
         damageImage.CrossFadeAlpha(0.2f, 0f, true);
-        damageImage.color = color;
-        damageImage.CrossFadeAlpha(0, duration, true);
+
+        if (amount > 0)
+            damageImage.color = new Color(1, 0, 0, 0.2f);
+        else
+            damageImage.color = new Color(0, 1, 0, 0.2f);
+
+        damageImage.CrossFadeAlpha(0, 0.5f, true);
     }
 }

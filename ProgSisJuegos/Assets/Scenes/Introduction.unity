@@ -900,6 +900,7 @@ GameObject:
   - component: {fileID: 603667297}
   - component: {fileID: 603667296}
   - component: {fileID: 603667295}
+  - component: {fileID: 603667299}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -981,7 +982,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 940131429}
-  - {fileID: 784660623}
   - {fileID: 1606278607}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -991,6 +991,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &603667299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603667294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b613f5007f1df5e47aeb2b1e71e03f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeImage: {fileID: 940131430}
+  damageImage: {fileID: 0}
+  thePlayer: {fileID: 1047097517}
 --- !u!1001 &608393645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1495,7 +1510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   glowSpeed: 2
   delayToChangeLevel: 5
-  fadeImage: {fileID: 940131430}
+  uiManager: {fileID: 603667299}
   pControllerScript: {fileID: 1047097517}
   disableThisSfxs:
   - {fileID: 1105432812}
@@ -1616,82 +1631,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5165976060502843571, guid: b307c9f1180841341bc5a60c77eca167, type: 3}
   m_PrefabInstance: {fileID: 5165976061125873503}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &784660622
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 784660623}
-  - component: {fileID: 784660625}
-  - component: {fileID: 784660624}
-  m_Layer: 5
-  m_Name: FadeImageToGameplay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &784660623
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 784660622}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 603667298}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &784660624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 784660622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &784660625
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 784660622}
-  m_CullTransparentMesh: 1
 --- !u!1 &793736387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4991215696081394028, guid: d3859a555a075eb4abc92c84db32edc6, type: 3}
@@ -2311,7 +2250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f0abd0d47d58b4fbb819666bd3d1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeImage: {fileID: 784660624}
   oldFadeImage: {fileID: 940131430}
   nonInteractablePills: {fileID: 2058324328}
   interactablePills: {fileID: 765094459}
@@ -6552,6 +6490,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 435752203724312270, guid: cdcc237cec424fc45821bc801f55f2e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3880965575357087665, guid: cdcc237cec424fc45821bc801f55f2e2, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9519897
@@ -7063,7 +7005,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 603667298}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7242,6 +7184,7 @@ MonoBehaviour:
   bathroomLight: {fileID: 899705341}
   thePlayer: {fileID: 1047097515}
   theMannequin: {fileID: 508427110}
+  uiManager: {fileID: 603667299}
   deltaTimes:
   - 0.15
   - 0.05
@@ -7262,9 +7205,8 @@ MonoBehaviour:
   - 9
   initialDelay: 0.25
   fadeInTime: 15
-  fadOutTime: 1
-  _fadeInColor: {r: 0, g: 0, b: 0, a: 0}
-  _fadeOutColor: {r: 0, g: 0, b: 1, a: 1}
+  fadeOutTime: 1
+  _fadeColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!4 &1649375878
 Transform:
   m_ObjectHideFlags: 0

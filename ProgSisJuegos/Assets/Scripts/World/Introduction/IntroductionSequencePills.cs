@@ -16,7 +16,7 @@ public class IntroductionSequencePills : MonoBehaviour, IInteractable
     bool _noSpamChangeLevel = true;
 
     [Header("References")]
-    public Image fadeImage;
+    public UIManager uiManager;
     public PlayerController pControllerScript;
     public List<GameObject> disableThisSfxs= new List<GameObject>();
     public GameObject mesh;
@@ -41,9 +41,7 @@ public class IntroductionSequencePills : MonoBehaviour, IInteractable
         _ilumination.intensity = 0;
         pControllerScript.LightDisable(false);
 
-        // UI image
-        fadeImage.gameObject.SetActive(true);
-        fadeImage.color = Color.black;
+        uiManager.OnForcedQuickFade(Color.black);
     }
 
     void Update()
