@@ -285,7 +285,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   interactionRange: 0.5
-  _damageColor: {r: 1, g: 0, b: 0, a: 0.2}
   _anim: {fileID: 715135239}
   _playerCamera: {fileID: 3880965575357087664}
   _body: {fileID: 3880965575399178836}
@@ -293,7 +292,8 @@ MonoBehaviour:
   _crosshair: {fileID: 0}
   _normalCrosshair: {fileID: 21300000, guid: 902b7828750c25f47b063961336b2c9a, type: 3}
   _interactableCrosshair: {fileID: 21300000, guid: 2b5917b7af8a0324da04920aaabc5b3d, type: 3}
-  kitchenknife: {fileID: 435752203724312270}
+  _weaponKitchenKnife: {fileID: 0}
+  _weaponGlock: {fileID: 0}
 --- !u!143 &3880965575399178792
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1763,11 +1763,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bea6735453d07634ea25577759582d18, type: 3}
---- !u!1 &435752203724312270 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3735718240841673512, guid: bea6735453d07634ea25577759582d18, type: 3}
-  m_PrefabInstance: {fileID: 3880965573991228902}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &956956640452842612 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4079205035934806418, guid: bea6735453d07634ea25577759582d18, type: 3}

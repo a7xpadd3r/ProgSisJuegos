@@ -15,11 +15,14 @@ public class DoorBase : MonoBehaviour, IInteractable
     [SerializeField] private AudioClip _openingSfx;
     [SerializeField] private AudioClip _closingSfx;
     [SerializeField] private AudioClip _lockedSfx;    
+    [SerializeField] private AudioClip _keySfx;    
 
     private bool _isClosed = true;
     private bool _transitioning;
     private Quaternion _originalRotation;
     private float _currentSpamDelay;
+
+    public event Action OnInteracted;
 
     private void Start()
     {
@@ -28,6 +31,8 @@ public class DoorBase : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        OnInteracted?.Invoke();
+
         if (!_transitioning && !_isLocked)
         {
             if (_isClosed)
@@ -53,6 +58,7 @@ public class DoorBase : MonoBehaviour, IInteractable
     public void UnlockLockDoor(bool isLocked)
     {
         _isLocked = isLocked;
+        _audioSource.PlayOneShot(_keySfx);
     }
 
     private void Update()

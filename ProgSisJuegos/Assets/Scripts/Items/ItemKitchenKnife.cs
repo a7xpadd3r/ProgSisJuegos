@@ -17,15 +17,8 @@ public class ItemKitchenKnife : ItemBase
 
         else
         {
-            manager.PlayUISound(pickedUpSound);
-            manager.KitchenKnife();
+            GManager.GiveWeaponToPlayer(WeaponTypes.KitchenKnife);
             Destroy(this.gameObject);
         } 
-    }
-
-    void Update()
-    {
-        float delta = Time.deltaTime;
-        LightCycle(delta);
     }
 }

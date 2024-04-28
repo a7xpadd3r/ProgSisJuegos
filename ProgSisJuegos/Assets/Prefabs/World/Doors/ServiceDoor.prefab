@@ -60,7 +60,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2594f881e176774bb54093760b10655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionDuration: 2
   _openingAngle: 90
   _spamDelay: 1.5
   _isLocked: 0
@@ -68,6 +67,7 @@ MonoBehaviour:
   _openingSfx: {fileID: 8300000, guid: db5b6fd16d9242c428413cb4b5ddb096, type: 3}
   _closingSfx: {fileID: 8300000, guid: db5b6fd16d9242c428413cb4b5ddb096, type: 3}
   _lockedSfx: {fileID: 8300000, guid: 4902f3c4f4f24a847b3e902c9a226e89, type: 3}
+  _keySfx: {fileID: 8300000, guid: 7d98ec7eda1f84442a049f66d76c8fc5, type: 3}
 --- !u!1 &2155185033201346530
 GameObject:
   m_ObjectHideFlags: 0

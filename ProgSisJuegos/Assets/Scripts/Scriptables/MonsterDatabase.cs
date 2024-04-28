@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewMonsterDatabase", menuName = "Data/Monsters")]
+[CreateAssetMenu(fileName = "NewMonsterData", menuName = "Data/Monsters")]
 public class MonsterDatabase : ScriptableObject
 {
     [Header("Generic settings")]
     [SerializeField] private float _life;
     [SerializeField, Range(0, 5)] private float _movementSpeed;
     [SerializeField, Range(0f, 10f)] private float _damageStunChance;
+
+    [Header("IA Settings")]
+    [SerializeField, Range(1, 20)] private float _visionDistance = 5;
+    [SerializeField, Range(0.1f, 2f)] private float _maxIdleTime = 1;
+    [SerializeField] private bool _canMove;
+    [SerializeField] private bool _canPatrol;
 
     [Header("Melee settings")]
     [SerializeField, Range(0f, 10f)] private float _attackChance;
@@ -37,9 +43,18 @@ public class MonsterDatabase : ScriptableObject
     public float MovementSpeed => _movementSpeed;
     public float DamageStunChance => _damageStunChance;
 
+
+    // IA
+    public float VisionDistance => _visionDistance;
+    public float IAMaxIdleTime => _maxIdleTime;
+    public bool IACanMove => _canMove;
+    public bool IACanPatrol => _canPatrol;
+
+
     // Main conditions
     public bool CanUseMeleeAttack => _canMeleeAttack;
     public bool CanUseRangedAttack => _canRangedAttack;
+
 
     // Attack
     public float AttackChance => _attackChance;
@@ -50,6 +65,7 @@ public class MonsterDatabase : ScriptableObject
     public GameObject ProjectilePrefab => _projectilePrefab;
     public float RangedAttackRange => _rangedAttackRange;
     public float RangedAttackCooldown => _rangedAttackCooldown;
+
 
     // Sounds
     public List<AudioClip> SoundsIdle => _idleClips;

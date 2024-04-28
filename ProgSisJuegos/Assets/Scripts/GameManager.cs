@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static AudioSource _audioSource;
-    public PlayerController thePlayer;
+    [SerializeField] private PlayerController thePlayer;
 
     private void Start()
     {
@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
         _audioSource.PlayOneShot(clip, volumeScale);
     }
 
-    public void KitchenKnife()
+    public void GiveWeaponToPlayer(WeaponTypes type)
     {
-        thePlayer.TheKK();
+        thePlayer.OnGiveWeapon?.Invoke(type);
     }
 }

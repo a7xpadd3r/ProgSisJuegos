@@ -1,8 +1,8 @@
 public interface IWeapon
 {
-    float recoil { get; set; }
     void Attack();
-    void AttackMeleeRay();
+    void AttackRay();
+    void Reload();
     void AttackMissSound();
     void AttackHitSound();
 }

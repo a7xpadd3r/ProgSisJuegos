@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,10 @@ public class DestructibleBase : MonoBehaviour, IDamageable
 
     private AudioSource _audioSource;
 
-
     public void AnyDamage(float amount)
     {
         _life -= amount;
-        _audioSource.PlayOneShot(damagedAudios[Random.Range(0, damagedAudios.Count)]);
+        _audioSource.PlayOneShot(damagedAudios[UnityEngine.Random.Range(0, damagedAudios.Count)]);
         if (_life <= 0) OnDeath();
     }
 

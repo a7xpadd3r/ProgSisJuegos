@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc8a04c5c23dcce4da1db6567e79e76d, type: 3}
+  m_Name: WeaponGlock
+  m_EditorClassIdentifier: 
+  _weaponType: 2
+  _weaponSprite: {fileID: 21300000, guid: 54e46c68ad8737a4f812d995a336af40, type: 3}
+  test: {fileID: 8266514575967018573, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+  _range: 20
+  _recoil: 0.35
+  _hitRecoil: 0
+  _bullets: 17
+  _weaponInSound: {fileID: 8300000, guid: fea683268f52ab543a0dfc8347fab386, type: 3}
+  _weaponOutSound: {fileID: 8300000, guid: fea683268f52ab543a0dfc8347fab386, type: 3}
+  _attackFireSound:
+  - {fileID: 8300000, guid: 36d954d384574fa40bfaf123fcea878b, type: 3}
+  _missAttackFireSound: []
+  _hitAttackFireSound: []
+  _hitWallAttackFireSound: []
+  _reloadStartSound: {fileID: 8300000, guid: 6d32d225d6972854c96b44da52144049, type: 3}
+  _reloadEndSound: {fileID: 8300000, guid: 53973be82ae1dbe439a38388e49bac33, type: 3}

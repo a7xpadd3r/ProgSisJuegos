@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField, Range(1, 1000)] private float mouseSensibility = 400;
     [SerializeField] private LayerMask interactionMask;
     [SerializeField, Range(0.1f, 1f)] private float interactionRange = 0.35f;
-    [SerializeField] private Color _damageColor = new Color(1,0,0, 0.2f);
     
     [Header("References")]
     [SerializeField] private Animator _anim;
@@ -26,6 +25,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private Sprite _normalCrosshair;
     [SerializeField] private Sprite _interactableCrosshair;
 
+    [Header("Weapons")]
+    [SerializeField] private WeaponKitchenKnife _weaponKitchenKnife;
+    [SerializeField] private WeaponGlock _weaponGlock;
+    private WeaponTypes _currentWeapon = WeaponTypes.None;
+    private bool _isKitchenKnifeEnabled;
+    private bool _isGlockEnabled;
+    
     private AudioSource _heartBeatLoopSound;
     private float _xRot;
     private float _currentLife;
@@ -34,7 +40,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private bool _lIsPlayerEnabled = true;
 
+    public WeaponTypes CurrentWeapon => _currentWeapon;
     public event Action<float> OnAnyDamage;
+    public Action<WeaponTypes> OnGiveWeapon;
 
     private void Start()
     {
@@ -47,6 +55,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         // Hide and lock mouse to game
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+
+        OnGiveWeapon += GiveWeapon;
     }
 
     private void Update()
@@ -55,34 +65,14 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             float delta = Time.deltaTime;
 
-            // Player movement
-            Vector2 movementInput = new Vector2(
-                Input.GetAxisRaw("Horizontal"),
-                Input.GetAxisRaw("Vertical"));
-
-            Transform transf = transform;
-            Vector3 move = transf.right * movementInput.x + transf.forward * movementInput.y;
-            _cController.Move(speed * delta * move);
-
-            // Player animation
-            if (move != Vector3.zero) _anim.SetBool("Walk", true);
-            else _anim.SetBool("Walk", false);
-
-            // Mouse movement
-            Vector2 mouseInput = new Vector2(
-                Input.GetAxis("Mouse X") * mouseSensibility * delta,
-                Input.GetAxis("Mouse Y") * mouseSensibility * delta);
-
-            _xRot -= mouseInput.y;
-            _xRot = Mathf.Clamp(_xRot, -90, 90);
-
-            _playerCamera.transform.localRotation = Quaternion.Euler(_xRot, 0, 0);
-            _body.Rotate(Vector3.up * mouseInput.x);
+            Movement(delta);
+            if (Input.GetKeyDown(KeyCode.Q)) SimpleWeaponSwap();
 
             // Interaction
             if (Input.GetKeyDown(KeyCode.E))
                 Interact(_cameraTransform, interactionRange);
-
+            
+            // Crosshair changes when something interactable is in the way
             if (_crosshair != null)
             {
                 if (Physics.Raycast(
@@ -118,22 +108,10 @@ public class PlayerController : MonoBehaviour, IDamageable
                 interactable?.Interact();
             }
     }
-    
-    void OnDrawGizmos()
-    {
-        if (_cameraTransform != null)
-            Gizmos.DrawRay(_cameraTransform.position, _cameraTransform.forward * interactionRange);
-    }
 
     public void LightDisable(bool isEnabled)
     {
         _lIsPlayerEnabled = isEnabled;
-    }
-
-    public GameObject kitchenknife;
-    public void TheKK()
-    {
-        kitchenknife.gameObject.SetActive(true);
     }
 
     public void EDisableCController(bool isEnabled)
@@ -152,5 +130,82 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void OnDeath()
     {
         throw new NotImplementedException();
+    }
+
+    private void Movement(float delta)
+    {
+        // Player movement
+        Vector2 movementInput = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical"));
+
+        Transform transf = transform;
+        Vector3 move = transf.right * movementInput.x + transf.forward * movementInput.y;
+        _cController.Move(speed * delta * move);
+
+        // Player animation
+        if (move != Vector3.zero) _anim.SetBool("Walk", true);
+        else _anim.SetBool("Walk", false);
+
+        // Mouse movement to camera view
+        Vector2 mouseInput = new Vector2(
+            Input.GetAxis("Mouse X") * mouseSensibility * delta,
+            Input.GetAxis("Mouse Y") * mouseSensibility * delta);
+
+        _xRot -= mouseInput.y;
+        _xRot = Mathf.Clamp(_xRot, -90, 90);
+
+        _playerCamera.transform.localRotation = Quaternion.Euler(_xRot, 0, 0);
+        _body.Rotate(Vector3.up * mouseInput.x);
+    }
+
+    private void SimpleWeaponSwap()
+    {
+            switch (_currentWeapon)
+            {
+                case WeaponTypes.None:
+                    if (_isKitchenKnifeEnabled)
+                    {
+                        _weaponKitchenKnife.gameObject.SetActive(true);
+                        _weaponGlock.gameObject.SetActive(false); // Just in case
+                    }
+                    _currentWeapon = WeaponTypes.KitchenKnife;
+                    break;
+
+                case WeaponTypes.KitchenKnife:
+                    if (_isGlockEnabled)
+                    {
+                        _weaponKitchenKnife.gameObject.SetActive(false);
+                        _weaponGlock.gameObject.SetActive(true);
+                    }
+                    _currentWeapon = WeaponTypes.Glock;
+                    break;
+
+                case WeaponTypes.Glock:
+                    if (_isKitchenKnifeEnabled)
+                    {
+                        _weaponKitchenKnife.gameObject.SetActive(true);
+                        _weaponGlock.gameObject.SetActive(false);
+                    }
+                    _currentWeapon = WeaponTypes.KitchenKnife;
+                    break;
+            }
+    }
+
+    private void GiveWeapon(WeaponTypes type)
+    {
+        switch (type)
+        {
+            case WeaponTypes.KitchenKnife:
+                _isKitchenKnifeEnabled = true;
+                break;
+            case WeaponTypes.Glock:
+                _isGlockEnabled = true;
+                break;
+            default:
+                break;
+        }
+
+        SimpleWeaponSwap();
     }
 }

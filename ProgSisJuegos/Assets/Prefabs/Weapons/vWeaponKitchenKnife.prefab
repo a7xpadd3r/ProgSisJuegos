@@ -974,13 +974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878a9affcbdcfe6459e9f4d89265f47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponData: {fileID: 11400000, guid: c438f73d2f12cc74686d83bd21cabfb5, type: 2}
   forwardReference: {fileID: 7078869825880911183}
-  _missAttackClips:
-  - {fileID: 8300000, guid: 58448b195f329624bb0720f2f2a8a2d0, type: 3}
-  _hitAttackClips: []
-  weaponRecoil: 0.5
-  hitRecoil: 0.25
-  range: 0.35
   damageableMask:
     serializedVersion: 2
     m_Bits: 128

@@ -2,18 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponKitchenKnife : MonoBehaviour, IWeapon
+public class WeaponKitchenKnife : MonoBehaviour
 {
+    [SerializeField] private WeaponDatabase _weaponData;
+
     private AudioSource _audioSource;
     private Animator _anim;
-
     public Transform forwardReference;
-    public List<AudioClip> _missAttackClips;
-    public List<AudioClip> _hitAttackClips;
-
-    public float weaponRecoil = 0.35f;
-    public float hitRecoil = 0.1f;
-    public float range = 2;
 
     public RaycastHit _rHit;
     public LayerMask damageableMask;
@@ -32,12 +27,11 @@ public class WeaponKitchenKnife : MonoBehaviour, IWeapon
         if (Input.GetKeyDown(KeyCode.Mouse0) && _canAttackAgain)
             Attack();
 
-        if (!_canAttackAgain && _currentrecoil < weaponRecoil)
+        if (!_canAttackAgain && _currentrecoil < _weaponData.Recoil)
             _currentrecoil += Time.deltaTime;
 
-        else if (!_canAttackAgain && _currentrecoil >= weaponRecoil)
+        else if (!_canAttackAgain && _currentrecoil >= _weaponData.Recoil)
             _canAttackAgain = true;
-
     }
 
     public void Attack()
@@ -51,40 +45,36 @@ public class WeaponKitchenKnife : MonoBehaviour, IWeapon
         }
     }
 
-    public void AttackMeleeRay()
-    {
-    }
-
-    public void AttackMissSound()
+    public void AttackRay()
     {
         if (Physics.Raycast(
-                forwardReference.position,
-                forwardReference.forward,
-                out _rHit,
-                range
-            ))
+        forwardReference.position,
+        forwardReference.forward,
+        out _rHit,
+        _weaponData.Range
+        ))
             if (_rHit.transform.gameObject.layer == LayerMask.NameToLayer("Damageable"))
             {
                 IDamageable damageable = _rHit.transform.gameObject.GetComponent<IDamageable>();
                 damageable?.AnyDamage(1);
-                _audioSource.PlayOneShot(_hitAttackClips[Random.Range(0, _hitAttackClips.Count)]);
-                _currentrecoil += hitRecoil;
+                _currentrecoil += _weaponData.HitRecoil;
+
+                if (_rHit.transform.gameObject.CompareTag("Enemy")) AttackHitSound();
+                else if (_rHit.transform.gameObject.CompareTag("Breakable")) AttackMissSound();
                 return;
             }
+        AttackMissSound();
+    }
 
-        _audioSource.PlayOneShot(_missAttackClips[Random.Range(0, _missAttackClips.Count)]);        
+    public void AttackMissSound()
+    {
+        _audioSource.PlayOneShot(_weaponData.SoundMissAttackFire[Random.Range(0, _weaponData.SoundMissAttackFire.Count)]);        
     }
 
     public void AttackHitSound()
     {
-        throw new System.NotImplementedException();
+        _audioSource.PlayOneShot(_weaponData.SoundHitAttackFire[Random.Range(0, _weaponData.SoundHitAttackFire.Count)]);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color= Color.yellow;
-        Gizmos.DrawRay(forwardReference.position, forwardReference.right * range);
-    }
-
-    public float recoil { get => 0; set => throw new System.NotImplementedException(); }
+    public void Reload() { }
 }
