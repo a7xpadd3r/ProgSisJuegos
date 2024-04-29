@@ -4,40 +4,42 @@ using UnityEngine;
 public class EnemyChaseState : EnemyStateBase
 {
     private Transform _selfTransform;
-    private Animator _animation;
-    private GameObject _thePlayer;
     private float _movementSpeed;
-    private Func<bool> _getIsPlayerNear;
-    private CharacterController _cController;
 
-    public EnemyChaseState(Transform selfTransform, Animator animation, GameObject thePlayer, float movementSpeed, Func<bool> getIsPlayerNear, CharacterController cController)
+    private Func<bool> _getIsPlayerNear;
+    Func<Vector3> _getPlayerDirection;
+    private Func<Animator> _getAnimator;
+    private Func<CharacterController> _getController;
+
+    public EnemyChaseState()
+    {
+        // Empty state
+    }
+
+    public EnemyChaseState(Transform selfTransform, Func<Animator> animation, Func<Vector3> playerDirection, float movementSpeed, Func<bool> getIsPlayerNear, Func<CharacterController> cController)
     {
         _selfTransform = selfTransform;
-        _animation = animation;
-        _thePlayer = thePlayer;
+        _getAnimator = animation;
+        _getPlayerDirection = playerDirection;
         _movementSpeed = movementSpeed;
         _getIsPlayerNear = getIsPlayerNear;
-        _cController = cController;
+        _getController = cController;
     }
 
     public override void OnEnterState()
     {
-        if (_thePlayer == null || !_getIsPlayerNear())
+        if (_getPlayerDirection() == null || !_getIsPlayerNear())
             OnStateChangePetitionHandler(EnemyStates.Idle);
     }
 
-    public override void OnExecute(float deltaTime)
+    public override void OnExecute(float deltaTime, float turnSpeed = 1)
     {
-        Vector3 dir = _thePlayer.transform.position - _selfTransform.position;
-        Vector3 dirNormalized = dir.normalized;
-        Vector3 dirNoYaxis = new Vector3(dirNormalized.x, 0, dirNormalized.z);
-
         // Move
-        _animation.SetBool("Walking", true);
-        _cController.Move(_movementSpeed * deltaTime * dirNoYaxis);
+        _getAnimator().SetBool("Walking", true);
+        _getController().Move(_movementSpeed * deltaTime * _getPlayerDirection());
 
         // Look at
-        _selfTransform.right = Vector3.LerpUnclamped(_selfTransform.right, dirNoYaxis, deltaTime);
+        _selfTransform.right = Vector3.LerpUnclamped(_selfTransform.right, _getPlayerDirection(), deltaTime * turnSpeed);
     }
 
     public override void OnExitState()

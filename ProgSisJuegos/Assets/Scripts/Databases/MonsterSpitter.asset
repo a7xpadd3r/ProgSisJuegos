@@ -17,15 +17,18 @@ MonoBehaviour:
   _damageStunChance: 0
   _visionDistance: 6
   _maxIdleTime: 1
-  _attackChance: 0
+  _turnSpeed: 10
+  _canMove: 0
+  _canPatrol: 0
+  _attackChance: 10
   _canMeleeAttack: 0
   _attackRange: 0
   _attackCooldown: 0
   _rangedAttackChance: 0
-  _canRangedAttack: 0
+  _canRangedAttack: 1
   _projectilePrefab: {fileID: 0}
-  _rangedAttackRange: 0
-  _rangedAttackCooldown: 0
+  _rangedAttackRange: 8
+  _rangedAttackCooldown: 2
   _idleClips: []
   _movementClips: []
   _meleeAttackClips: []

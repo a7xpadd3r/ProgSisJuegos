@@ -3,28 +3,34 @@ using UnityEngine;
 
 public class EnemyPatrolState : EnemyStateBase
 {
+    // References
     private Transform _selfTransform;
-    private Animator _animation;
-    private float _movementSpeed;
-    private Func<bool> _getIsPlayerNear;
     private CharacterController _cController;
-
     private Transform[] _patrolPoints;
     private Transform[] _playerSightLocations;
     private Transform _currentTravelTransform;
+
+    private float _movementSpeed;
+    private Func<bool> _getIsPlayerNear;
+    private Func<Animator> _getAnimator;
+    private Func<CharacterController> _getController;
+
     private int _currentPatrolIndex;
     private bool _isReversePatrol;
     private float _travelMinDistance = 2;
 
-    public EnemyStates caca = EnemyStates.Idle;
+    public EnemyPatrolState()
+    {
+        // Empty state
+    }
 
-    public EnemyPatrolState(Transform selfTransform, Animator animation, float movementSpeed, Func<bool> getIsPlayerNear, CharacterController cController, Transform[] patrolPoints)
+    public EnemyPatrolState(Transform selfTransform, Func<Animator> animation, float movementSpeed, Func<bool> getIsPlayerNear, Func<CharacterController> cController, Transform[] patrolPoints)
     {
         _selfTransform = selfTransform;
-        _animation = animation;
+        _getAnimator = animation;
         _movementSpeed = movementSpeed;
         _getIsPlayerNear = getIsPlayerNear;
-        _cController = cController;
+        _getController = cController;
     }
 
     public override void OnEnterState()
@@ -41,7 +47,7 @@ public class EnemyPatrolState : EnemyStateBase
         _currentTravelTransform = _patrolPoints[0];
     }
 
-    public override void OnExecute(float deltaTime)
+    public override void OnExecute(float deltaTime, float turnSpeed = 1)
     {
         if (_patrolPoints == null || _patrolPoints.Length <= 0)
         {
@@ -60,11 +66,11 @@ public class EnemyPatrolState : EnemyStateBase
         Vector3 dirNoYaxis = new Vector3(dirNormalized.x, 0, dirNormalized.z);
 
         // Move
-        _animation.SetBool("Walking", true);
+        _getAnimator().SetBool("Walking", true);
         _cController.Move(_movementSpeed * deltaTime * dirNoYaxis);
 
         // Look at
-        _selfTransform.right = Vector3.LerpUnclamped(_selfTransform.right, dirNoYaxis, deltaTime);
+        _selfTransform.right = Vector3.LerpUnclamped(_selfTransform.right, dirNoYaxis, deltaTime * turnSpeed);
 
         if (IsCloseToPoint(_currentTravelTransform.position, _travelMinDistance))
         {
