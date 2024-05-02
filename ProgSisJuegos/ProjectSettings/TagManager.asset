@@ -37,7 +37,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Trigger
   - Weapon
   m_SortingLayers:
   - name: Default

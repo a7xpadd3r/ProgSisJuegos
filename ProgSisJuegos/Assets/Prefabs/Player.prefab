@@ -31,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 956956640452842612}
+  - {fileID: 3625763689568900451}
   m_Father: {fileID: 3880965575357087665}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -292,8 +293,8 @@ MonoBehaviour:
   _crosshair: {fileID: 0}
   _normalCrosshair: {fileID: 21300000, guid: 902b7828750c25f47b063961336b2c9a, type: 3}
   _interactableCrosshair: {fileID: 21300000, guid: 2b5917b7af8a0324da04920aaabc5b3d, type: 3}
-  _weaponKitchenKnife: {fileID: 0}
-  _weaponGlock: {fileID: 0}
+  _weaponKitchenKnife: {fileID: 3255091254799846207}
+  _weaponGlock: {fileID: 5449939682239142257}
 --- !u!143 &3880965575399178792
 CharacterController:
   m_ObjectHideFlags: 0
@@ -305,8 +306,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.15
+  m_Height: 1.4
+  m_Radius: 0.23
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1699,11 +1700,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: d9fe21892529fd343a902dabba612d20, type: 3}
     - target: {fileID: 3735718240841673512, guid: bea6735453d07634ea25577759582d18, type: 3}
       propertyPath: m_Name
-      value: vKitchenKnife Variant
+      value: vWeaponKitchenKnife
       objectReference: {fileID: 0}
     - target: {fileID: 3735718240841673512, guid: bea6735453d07634ea25577759582d18, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4079205035934806418, guid: bea6735453d07634ea25577759582d18, type: 3}
       propertyPath: m_RootOrder
@@ -1768,8 +1769,96 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4079205035934806418, guid: bea6735453d07634ea25577759582d18, type: 3}
   m_PrefabInstance: {fileID: 3880965573991228902}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3255091254799846207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1799080164082527961, guid: bea6735453d07634ea25577759582d18, type: 3}
+  m_PrefabInstance: {fileID: 3880965573991228902}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878a9affcbdcfe6459e9f4d89265f47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6333968975476066473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7078869825880911183, guid: bea6735453d07634ea25577759582d18, type: 3}
   m_PrefabInstance: {fileID: 3880965573991228902}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5449939683761557908
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1563941609}
+    m_Modifications:
+    - target: {fileID: 8266514575967018573, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_Name
+      value: vWeaponGlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 8266514575967018573, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0286
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1306
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+--- !u!4 &3625763689568900451 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8787472412517729527, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+  m_PrefabInstance: {fileID: 5449939683761557908}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5449939682239142257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1724041445, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+  m_PrefabInstance: {fileID: 5449939683761557908}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d169b85be684fef4484f1718e6e9557f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

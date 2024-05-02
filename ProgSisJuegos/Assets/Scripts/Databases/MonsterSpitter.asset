@@ -14,24 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _life: 10
   _movementSpeed: 1
-  _damageStunChance: 0
+  _damageStunChance: 3.5
+  _maxStunTime: 0.5
   _visionDistance: 6
   _maxIdleTime: 1
   _turnSpeed: 10
   _canMove: 0
   _canPatrol: 0
-  _attackChance: 10
+  _attackChance: 0
   _canMeleeAttack: 0
   _attackRange: 0
   _attackCooldown: 0
-  _rangedAttackChance: 0
+  _rangedAttackChance: 8
   _canRangedAttack: 1
-  _projectilePrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 7462004646277384390, guid: d5352f67404b4f84084a340997dbf129, type: 3}
   _rangedAttackRange: 8
   _rangedAttackCooldown: 2
-  _idleClips: []
+  _idleClips:
+  - {fileID: 8300000, guid: f78f2ba33d274da479dd21b2647f2c16, type: 3}
   _movementClips: []
   _meleeAttackClips: []
-  _rangedAttackClips: []
-  _damagedClips: []
-  _deathClips: []
+  _meleeHitAttackClips: []
+  _rangedAttackClips:
+  - {fileID: 8300000, guid: 125818d4df68baf4e8ef9c22b8e3df7d, type: 3}
+  - {fileID: 8300000, guid: c0503cb5d6c081c4c8a3ff09832c4cc6, type: 3}
+  _rangedHitAttackClips:
+  - {fileID: 8300000, guid: d8bc18705b67d5b448cdee34f222cda9, type: 3}
+  _damagedClips:
+  - {fileID: 8300000, guid: a77a7d544ff8be54e98163eea568978f, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: eaa036fd644320044967b103f59536ce, type: 3}

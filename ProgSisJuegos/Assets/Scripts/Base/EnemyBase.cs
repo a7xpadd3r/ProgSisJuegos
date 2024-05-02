@@ -13,6 +13,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private MonsterDatabase _monsterData;
     [SerializeField] private Transform[] _patrolPoints;
     [SerializeField] private Animator _animation;
+    [SerializeField] private Transform _projectileOut;
 
     private CharacterController _characterController;
     private AudioSource _audioSource;
@@ -28,18 +29,33 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public Animator Animation => _animation;
     public AudioSource SoundMainAudio => _audioSource;
 
+    // Ranges
+    public bool PlayerNearAndLoS => IsPlayerNear();
 
     public virtual void AnyDamage(float amount)
     {
         _currentLife -= amount;
-        print("New life: " + _currentLife);
+
+        if (_currentLife <= 0)
+        {
+            OnDeath();
+            return;
+        }
+
+        if (_currentLife > 0 && UnityEngine.Random.Range(0.1f, 10) <= _monsterData.DamageStunChance)
+            OnStun();
+    }
+
+    public virtual void OnStun()
+    {
+        HandleStateChange(EnemyStates.Damaged);
     }
 
     public virtual void OnDeath()
     {
         UnsubscribeToStateChanges();
-        print("ded");
-        //Destroy(gameObject);
+        HandleStateChange(EnemyStates.Death);
+        _characterController.enabled = false;
     }
 
     private void Update()
@@ -104,9 +120,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     private void HandleStateChange(EnemyStates stateObj)
     {
-        print("new state " + stateObj.ToString());
         EnemyStateBase newState;
-
         switch (stateObj)
         {
             case EnemyStates.Idle:
@@ -134,7 +148,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
                     throw new Exception($"State {stateObj} not found");
                 break;
             case EnemyStates.Death:
-                if (!TryGetState<EnemyIdleState>(out newState))
+                if (!TryGetState<EnemyDeathState>(out newState))
                     throw new Exception($"State {stateObj} not found");
                 break;
             default:
@@ -167,31 +181,31 @@ public class EnemyBase : MonoBehaviour, IDamageable
         _currentEnemyState.OnEnterState();
     }
 
-    // add some attack melee and ranged stuff now
-
-    public bool IsPlayerNear()
+    private bool IsPlayerNear()
     {
+        // If this is a "neutral pawn"
         if (_thePlayer == null || (!MonsterData.IACanUseMeleeAttack && !MonsterData.IACanUseRangedAttack)) return false;
 
+        // Check distance
         Transform selfTransform = this.transform;
-        Vector3 playerPos = _thePlayer.transform.position;
+        Vector3 playerPos = new Vector3(_thePlayer.transform.position.x, _thePlayer.transform.position.y + 0.25f, _thePlayer.transform.position.z);
         Vector3 direction = playerPos - selfTransform.position;
 
         bool isInVisionDistance = direction.magnitude <= MonsterData.IAVisionDistance;
         if (!isInVisionDistance) return false;
 
+        // Check LoS
+        return IsPlayerOnLoS(selfTransform.position, direction, MonsterData.IAVisionDistance);
+    }
+
+    private bool IsPlayerOnLoS(Vector3 rayStartingPos, Vector3 direction, float maxRange)
+    {
         RaycastHit hit;
-        if (isInVisionDistance) 
+
+        if (Physics.Raycast(rayStartingPos, direction, out hit, maxRange))
         {
-            if (Physics.Raycast(selfTransform.position, direction, out hit, MonsterData.IAVisionDistance))
-            {
-                if (hit.transform.gameObject == _thePlayer)
-                {
-                    Debug.DrawRay(selfTransform.position, direction * MonsterData.IAVisionDistance, Color.green);
-                    return true;
-                }
-                Debug.DrawRay(selfTransform.position, direction * MonsterData.IAVisionDistance, Color.red);
-            }
+            if (hit.transform.gameObject == _thePlayer)
+                return true;
         }
         return false;
     }
@@ -224,14 +238,23 @@ public class EnemyBase : MonoBehaviour, IDamageable
     {
         Vector3 dir = _thePlayer.transform.position - transform.position;
         Vector3 dirNormalized = dir.normalized;
-        Vector3 dirNoYaxis = new Vector3(dirNormalized.x, 0, dirNormalized.z);
-        return dirNoYaxis;
+        return new Vector3(dirNormalized.x, 0, dirNormalized.z);
     }
 
     public bool ExecRangedAttack()
     {
-        print("ranged attack?");
-        return true;
+        if (UnityEngine.Random.Range(0.1f, 10) > MonsterData.RangedAttackChance) return false;
+
+        var projectile = Instantiate(MonsterData.ProjectilePrefab, _projectileOut.position, _projectileOut.rotation);
+        projectile.TryGetComponent(out ProjectileBase projectileScript);
+
+        if (projectileScript != null)
+        {
+            projectileScript.direction = (_thePlayer.transform.position - transform.position).normalized;
+            return true;
+        }
+
+        return false;
     }
     
 }
