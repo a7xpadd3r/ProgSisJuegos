@@ -7,9 +7,9 @@ public class WeaponDatabase : ScriptableObject
 {
     [SerializeField] private WeaponTypes _weaponType;
     [SerializeField] private Sprite _weaponSprite;
-    public GameObject test;
 
     [Header("Weapon settings")]
+    [SerializeField] private float _damage;
     [SerializeField] private float _range;
     [SerializeField] private float _recoil;
     [SerializeField] private float _hitRecoil;
@@ -19,6 +19,7 @@ public class WeaponDatabase : ScriptableObject
     [SerializeField] private AudioClip _weaponInSound;
     [SerializeField] private AudioClip _weaponOutSound;
     [SerializeField] private List<AudioClip> _attackFireSound;
+    [SerializeField] private List<AudioClip> _noBulletsSound;
     [SerializeField] private List<AudioClip> _missAttackFireSound;
     [SerializeField] private List<AudioClip> _hitAttackFireSound;
     [SerializeField] private List<AudioClip> _hitWallAttackFireSound;
@@ -27,6 +28,7 @@ public class WeaponDatabase : ScriptableObject
 
     // Values
     public WeaponTypes Type => _weaponType;
+    public float Damage => _damage;
     public float Range => _range;
     public float Recoil => _recoil;
     public float HitRecoil => _hitRecoil;
@@ -36,6 +38,7 @@ public class WeaponDatabase : ScriptableObject
     public AudioClip SoundWeaponUp => _weaponInSound;
     public AudioClip SoundWeaponOut => _weaponOutSound;
     public List<AudioClip> SoundAttackFire => _attackFireSound;
+    public List<AudioClip> SoundNoBullets => _noBulletsSound;
     public List<AudioClip> SoundMissAttackFire => _missAttackFireSound;
     public List<AudioClip> SoundHitAttackFire => _hitAttackFireSound;
     public AudioClip SoundStartReload => _reloadStartSound;

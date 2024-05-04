@@ -13,26 +13,29 @@ MonoBehaviour:
   m_Name: MonsterSpitter
   m_EditorClassIdentifier: 
   _life: 10
+  _canMove: 0
   _movementSpeed: 1
   _damageStunChance: 3.5
   _maxStunTime: 0.5
   _visionDistance: 6
   _maxIdleTime: 1
   _turnSpeed: 10
-  _canMove: 0
   _canPatrol: 0
-  _attackChance: 0
   _canMeleeAttack: 0
+  _meleeDamage: 0
+  _attackChance: 0
   _attackRange: 0
   _attackCooldown: 0
-  _rangedAttackChance: 8
   _canRangedAttack: 1
   _projectilePrefab: {fileID: 7462004646277384390, guid: d5352f67404b4f84084a340997dbf129, type: 3}
+  _rangedDamage: 3.5
+  _rangedAttackChance: 8
   _rangedAttackRange: 8
   _rangedAttackCooldown: 2
   _idleClips:
   - {fileID: 8300000, guid: f78f2ba33d274da479dd21b2647f2c16, type: 3}
   _movementClips: []
+  _movementAdditionalClips: []
   _meleeAttackClips: []
   _meleeHitAttackClips: []
   _rangedAttackClips:

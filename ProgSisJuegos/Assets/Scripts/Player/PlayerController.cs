@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public WeaponTypes CurrentWeapon => _currentWeapon;
     public event Action<float> OnAnyDamage;
     public Action<WeaponTypes> OnGiveWeapon;
+    public Action OnPlayerDeath;
 
     private void Start()
     {
@@ -124,12 +125,16 @@ public class PlayerController : MonoBehaviour, IDamageable
         OnAnyDamage(amount);
         _currentLife -= amount;
 
-        if (_currentLife <= 5) _heartBeatLoopSound.Play();
+        if (_currentLife <= 5 && !_heartBeatLoopSound.isPlaying) _heartBeatLoopSound.Play();
+        else if (_currentLife > 5 && _heartBeatLoopSound.isPlaying) _heartBeatLoopSound.Stop();
+
+        if (_currentLife <= 0)
+            OnDeath();
     }
 
     public void OnDeath()
     {
-        throw new NotImplementedException();
+        OnPlayerDeath?.Invoke();
     }
 
     private void Movement(float delta)

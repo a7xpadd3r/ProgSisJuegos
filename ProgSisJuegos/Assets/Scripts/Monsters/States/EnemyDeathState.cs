@@ -5,11 +5,6 @@ public class EnemyDeathState : EnemyStateBase
 {
     private Func<Animator> _getAnimator;
 
-    public EnemyDeathState()
-    {
-        // Empty state
-    }
-
     public EnemyDeathState(Func<Animator> animation)
     {
         _getAnimator = animation;

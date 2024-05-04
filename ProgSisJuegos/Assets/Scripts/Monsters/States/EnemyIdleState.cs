@@ -9,19 +9,12 @@ public class EnemyIdleState : EnemyStateBase
 
     // References
     private Func<Animator> _getAnimator;
+    private EnemyBase _controller;
 
-    // Conditions
-    EnemyBase _controller;
-
-    public EnemyIdleState() 
-    { 
-        //Empty state                              
-    }
-
-    public EnemyIdleState(Func<Animator> getAnimation, EnemyBase baseScript)
+    public EnemyIdleState(EnemyBase baseScript)
     {
-        _getAnimator = getAnimation;
         _controller = baseScript;
+        _getAnimator = _controller.AnimationState;
     }
 
     public override void OnEnterState()
@@ -37,7 +30,7 @@ public class EnemyIdleState : EnemyStateBase
         if (_controller.PlayerNearAndLoS)
         {
             // Chase if not on range
-            if (_controller.MonsterData.IACanMove && !_controller.IsOnMeleeAttackRange() && !_controller.IsOnRangedAttackRange())
+            if (!_controller.IsOnMeleeAttackRange() && !_controller.IsOnRangedAttackRange() && _controller.MonsterData.IACanMove)
                 OnStateChangePetitionHandler(EnemyStates.Persuit);
 
             // Do melee attack if not on ranged one

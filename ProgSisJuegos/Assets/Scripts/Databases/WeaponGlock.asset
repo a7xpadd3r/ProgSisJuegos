@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponType: 2
   _weaponSprite: {fileID: 21300000, guid: 54e46c68ad8737a4f812d995a336af40, type: 3}
-  test: {fileID: 8266514575967018573, guid: 6a838b04dc8bfac4db8c4ef27c4c6ea6, type: 3}
+  _damage: 3
   _range: 20
   _recoil: 0.35
   _hitRecoil: 0
@@ -23,6 +23,8 @@ MonoBehaviour:
   _weaponOutSound: {fileID: 8300000, guid: fea683268f52ab543a0dfc8347fab386, type: 3}
   _attackFireSound:
   - {fileID: 8300000, guid: 36d954d384574fa40bfaf123fcea878b, type: 3}
+  _noBulletsSound:
+  - {fileID: 8300000, guid: 05715cf1d85763542b631cce83e47a56, type: 3}
   _missAttackFireSound: []
   _hitAttackFireSound: []
   _hitWallAttackFireSound: []

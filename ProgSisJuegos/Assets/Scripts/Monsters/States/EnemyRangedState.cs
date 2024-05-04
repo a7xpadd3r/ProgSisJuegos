@@ -12,20 +12,15 @@ public class EnemyRangedState : EnemyStateBase
     private float _currentCooldown;
     private EnemyBase _controller;
 
-    public EnemyRangedState() 
-    { 
-        // Empty state
-    }
-
-    public EnemyRangedState(Transform selfTransform, Func<Vector3> playerDirection, Func<Animator> animation, float cooldown, EnemyBase baseScript, Func<bool> executedAttack)
+    public EnemyRangedState(Transform selfTransform, EnemyBase baseScript)
     {
-        _selfTransform = selfTransform;
-        _playerDirection = playerDirection;
-        _getAnimator = animation;
-
-        _cooldown = cooldown;
         _controller = baseScript;
-        _isAttackExecuted = executedAttack;
+
+        _cooldown = _controller.MonsterData.RangedAttackCooldown;
+        _isAttackExecuted = _controller.ExecRangedAttack;
+        _playerDirection = _controller.RequestingDirectionToPlayer;
+        _getAnimator = _controller.AnimationState;
+        _selfTransform = selfTransform;
     }
 
     public override void OnEnterState()
@@ -43,7 +38,7 @@ public class EnemyRangedState : EnemyStateBase
             bool attack = _isAttackExecuted();
 
             if (attack && _getAnimator() != null)
-                _getAnimator().SetTrigger("Attack");
+                _getAnimator().SetTrigger("RangedAttack");
 
             _currentCooldown = _cooldown;
         }

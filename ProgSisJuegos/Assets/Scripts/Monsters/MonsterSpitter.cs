@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MonsterSpitter : EnemyBase
 {
     public override void InitializeStates()
     {
-        var idleState = new EnemyIdleState(AnimationState, this);
-        var rangedAttackState = new EnemyRangedState(transform, RequestingDirectionToPlayer, AnimationState, MonsterData.RangedAttackCooldown, this, ExecRangedAttack);
+        var idleState = new EnemyIdleState(this);
+        var rangedAttackState = new EnemyRangedState(transform, this);
         var damagedState = new EnemyDamagedState(AnimationState, MonsterData.MaxStunTime);
         var deathState = new EnemyDeathState(AnimationState);
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ProjectileBase : MonoBehaviour
 {
-    [SerializeField, Range(0, 10)] private float damage;
+    public float damage;
     [SerializeField, Range(1, 3)] private float life = 1;
     [SerializeField, Range(10, 50)] private float speed = 10;
     [SerializeField, Range(0.01f, 10)] private float _speedDesviation = 1.5f;
@@ -32,7 +32,6 @@ public class ProjectileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         collision.transform.TryGetComponent(out IDamageable damageable);
         damageable?.AnyDamage(damage);
         Destroy(this.gameObject);

@@ -28,9 +28,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public Transform[] PatrolPoints => _patrolPoints;
     public Animator Animation => _animation;
     public AudioSource SoundMainAudio => _audioSource;
-
-    // Ranges
     public bool PlayerNearAndLoS => IsPlayerNear();
+    public bool IsAlive => _currentLife > 0;
 
     public virtual void AnyDamage(float amount)
     {
@@ -76,8 +75,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     public virtual void InitializeStates()
     {
-        // Generic empty state list
-        // Idle, Patrol, Persuit, Attack, RangedAttack, Damaged, Death
+        /*
+         * Generic empty state list example
+         * Idle, Patrol, Persuit, Attack, RangedAttack, Damaged, Death
 
         var idleState = new EnemyIdleState();
         var patrolState = new EnemyPatrolState();
@@ -86,7 +86,6 @@ public class EnemyBase : MonoBehaviour, IDamageable
         var rangedState = new EnemyRangedState();
         var damagedState = new EnemyDamagedState();
         var deathState = new EnemyDeathState();
-
 
         _enemyStates.Add(idleState);
         _enemyStates.Add(patrolState);
@@ -98,6 +97,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
         _currentEnemyState = idleState;
         SubscribeToStateChange();
+        
+      */
     }
 
     public void SetDefaultStateAndSubscribeToStates(EnemyStateBase state)
@@ -241,6 +242,21 @@ public class EnemyBase : MonoBehaviour, IDamageable
         return new Vector3(dirNormalized.x, 0, dirNormalized.z);
     }
 
+    public bool ExecMeleeAttack()
+    {
+        if (UnityEngine.Random.Range(0.1f, 10) > MonsterData.AttackChance) return false;
+
+        // Find player and apply damage (maybe TODO damage everyone?)
+        Collider[] objectsInRange = Physics.OverlapSphere(transform.position, MonsterData.AttackRange);
+        for (int i = 0; i < objectsInRange.Length; i++)
+        {
+            if (objectsInRange[i].CompareTag("Player"))
+                objectsInRange[i].GetComponent<IDamageable>()?.AnyDamage(MonsterData.DamageMelee);
+        }
+
+        return true;
+    }
+
     public bool ExecRangedAttack()
     {
         if (UnityEngine.Random.Range(0.1f, 10) > MonsterData.RangedAttackChance) return false;
@@ -251,6 +267,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         if (projectileScript != null)
         {
             projectileScript.direction = (_thePlayer.transform.position - transform.position).normalized;
+            projectileScript.damage = MonsterData.DamageRanged;
             return true;
         }
 

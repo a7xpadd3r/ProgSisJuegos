@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class RockletsSpookySequence : MonoBehaviour
 {
     public List<GameObject> allTheSpookyWalls;
-    public MonsterWheelchairBase wheelchairMonster;
+    public MonsterWheelchair wheelchairMonster;
     public UIManager uiManager;
     public Transform teleportDestionationAfterSequence;
     public PlayerController thePlayer;

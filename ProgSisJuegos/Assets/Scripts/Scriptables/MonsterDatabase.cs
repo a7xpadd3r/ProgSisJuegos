@@ -7,6 +7,7 @@ public class MonsterDatabase : ScriptableObject
 {
     [Header("Generic settings")]
     [SerializeField, Range(1, 100)] private float _life = 1;
+    [SerializeField] private bool _canMove;
     [SerializeField, Range(0, 5)] private float _movementSpeed = 1.35f;
     [SerializeField, Range(0f, 10f)] private float _damageStunChance = 3.5f;
     [SerializeField, Range(0.1f, 10f)] private float _maxStunTime = 1;
@@ -15,25 +16,27 @@ public class MonsterDatabase : ScriptableObject
     [SerializeField, Range(1, 20)] private float _visionDistance = 5;
     [SerializeField, Range(0.1f, 2f)] private float _maxIdleTime = 1;
     [SerializeField, Range(0.1f, 10)] private float _turnSpeed = 1;
-    [SerializeField] private bool _canMove;
     [SerializeField] private bool _canPatrol;
 
     [Header("Melee settings")]
+    [SerializeField] private bool _canMeleeAttack;
+    [SerializeField, Range(0f, 10f)] private float _meleeDamage = 2;
     [SerializeField, Range(0f, 10f)] private float _attackChance;
-    [SerializeField] private bool _canMeleeAttack;    
-    [SerializeField] private float _attackRange;
-    [SerializeField] private float _attackCooldown;
+    [SerializeField, Range(0.1f, 50)] private float _attackRange;
+    [SerializeField, Range(0.1f, 10)] private float _attackCooldown;
 
     [Header("Ranged settings")]
-    [SerializeField, Range(0f, 10f)] private float _rangedAttackChance;
     [SerializeField] private bool _canRangedAttack;
     [SerializeField] private GameObject _projectilePrefab;
-    [SerializeField] private float _rangedAttackRange;
-    [SerializeField] private float _rangedAttackCooldown;
+    [SerializeField, Range(0f, 10f)] private float _rangedDamage = 3.5f;
+    [SerializeField, Range(0f, 10f)] private float _rangedAttackChance;
+    [SerializeField, Range(0.1f, 50)] private float _rangedAttackRange;
+    [SerializeField, Range(0.1f, 10)] private float _rangedAttackCooldown;
 
     [Header("Sound settings")]
     [SerializeField] private List<AudioClip> _idleClips;
     [SerializeField] private List<AudioClip> _movementClips;
+    [SerializeField] private List<AudioClip> _movementAdditionalClips;
     [SerializeField] private List<AudioClip> _meleeAttackClips;
     [SerializeField] private List<AudioClip> _meleeHitAttackClips;
     [SerializeField] private List<AudioClip> _rangedAttackClips;
@@ -58,6 +61,9 @@ public class MonsterDatabase : ScriptableObject
     public bool IACanUseRangedAttack => _canRangedAttack;
 
     // Attack
+    public float DamageMelee => _meleeDamage;
+    public float DamageRanged => _rangedDamage;
+
     public float AttackChance => _attackChance;
     public float AttackRange => _attackRange;
     public float AttackCooldown => _attackCooldown;
@@ -71,6 +77,7 @@ public class MonsterDatabase : ScriptableObject
     // Sounds
     public List<AudioClip> SoundsIdle => _idleClips;
     public List<AudioClip> SoundsMovement => _movementClips;
+    public List<AudioClip> SoundsMovementAdditional => _movementAdditionalClips;
     public List<AudioClip> SoundsMeleeAttack => _meleeAttackClips;
     public List<AudioClip> SoundsMeleeHitAttack => _meleeHitAttackClips;
     public List<AudioClip> SoundsRangedAttack => _rangedAttackClips;
@@ -117,6 +124,22 @@ public class MonsterDatabase : ScriptableObject
             case EnemyStates.Death:
                 if (SoundsDeath.Count > 0)
                     value = SoundsDeath[Random.Range(0, SoundsDeath.Count - 1)];
+                break;
+        }
+
+        return value;
+    }
+
+    // the idea is to use another source for steps n' additional stuff
+    public AudioClip GetRandomAdditionalClip(AdditionalSounds type)
+    {
+        AudioClip value = null;
+
+        switch (type)
+        {
+            case AdditionalSounds.Movement:
+                if (SoundsMovementAdditional.Count > 0)
+                    value = SoundsMovementAdditional[Random.Range(0, SoundsMovementAdditional.Count - 1)];
                 break;
         }
 

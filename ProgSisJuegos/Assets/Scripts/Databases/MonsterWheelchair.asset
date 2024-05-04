@@ -12,30 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c49631592e731149b8eadc7a3b6097d, type: 3}
   m_Name: MonsterWheelchair
   m_EditorClassIdentifier: 
-  _life: 20
+  _life: 8
+  _canMove: 1
   _movementSpeed: 1
   _damageStunChance: 4
-  _attackChance: 8.5
+  _maxStunTime: 1
+  _visionDistance: 5
+  _maxIdleTime: 1
+  _turnSpeed: 1
+  _canPatrol: 0
   _canMeleeAttack: 1
-  _attackRange: 1
-  _attackCooldown: 2.5
-  _rangedAttackChance: 0
+  _meleeDamage: 0.65
+  _attackChance: 6
+  _attackRange: 0.7
+  _attackCooldown: 1.5
   _canRangedAttack: 0
   _projectilePrefab: {fileID: 0}
-  _rangedAttackRange: 0
-  _rangedAttackCooldown: 0
+  _rangedDamage: 0
+  _rangedAttackChance: 0
+  _rangedAttackRange: 0.1
+  _rangedAttackCooldown: 0.1
   _idleClips:
   - {fileID: 8300000, guid: 1533151fece69e24cbd67aab032f6fe7, type: 3}
-  _movementClips:
+  _movementClips: []
+  _movementAdditionalClips:
   - {fileID: 8300000, guid: b63c8bd237e88d34d9665a184c6136ef, type: 3}
   - {fileID: 8300000, guid: 892c058091c371e45958fff42b7d4c14, type: 3}
   - {fileID: 8300000, guid: bdb3eb813c536f8499e3a97194aece1d, type: 3}
   - {fileID: 8300000, guid: 352bd3f5ecb05554695af2dc003c2409, type: 3}
   _meleeAttackClips:
   - {fileID: 8300000, guid: 2408b4204dee76d49a46c0784f1cfe82, type: 3}
-  - {fileID: 8300000, guid: 6e2753a1ce443024cb6e5415b4e59852, type: 3}
-  - {fileID: 8300000, guid: a184a09ecb3e3c448924abee32465b90, type: 3}
+  _meleeHitAttackClips: []
   _rangedAttackClips: []
+  _rangedHitAttackClips: []
   _damagedClips:
   - {fileID: 8300000, guid: 536951d2357d15744a6a3f3522427a3a, type: 3}
   - {fileID: 8300000, guid: 3df9310a323a29241bf954a88b0ee35b, type: 3}

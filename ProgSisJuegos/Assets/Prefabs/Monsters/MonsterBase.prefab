@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5534495283015059298}
   m_Layer: 7
   m_Name: MonsterBase
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,4 +163,5 @@ MonoBehaviour:
   _monsterData: {fileID: 11400000, guid: 7b6df30b4a85a56479befed14d66f20b, type: 2}
   _patrolPoints: []
   _animation: {fileID: 0}
+  _projectileOut: {fileID: 0}
   _thePlayer: {fileID: 0}
