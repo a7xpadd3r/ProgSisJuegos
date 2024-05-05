@@ -954,7 +954,11 @@ MonoBehaviour:
   _weaponData: {fileID: 11400000, guid: 298fe9eddaa07cc49a59ace8a1477a20, type: 2}
   _audioSource: {fileID: 1724041443}
   _anim: {fileID: 1724041442}
+  forwardReference: {fileID: 0}
   _currentRecoil: 0
   _currentBullets: 0
   _canShootAgain: 1
   _isReloading: 0
+  muzzleDuration: 0.025
+  muzzleLight: {fileID: 0}
+  muzzleSprite: {fileID: 0}

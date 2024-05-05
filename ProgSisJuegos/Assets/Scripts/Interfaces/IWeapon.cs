@@ -5,4 +5,5 @@ public interface IWeapon
     void Reload();
     void AttackMissSound();
     void AttackHitSound();
+    void WeaponOut();
 }

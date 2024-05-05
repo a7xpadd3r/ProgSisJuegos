@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c49631592e731149b8eadc7a3b6097d, type: 3}
+  m_Name: MonsterFaster
+  m_EditorClassIdentifier: 
+  _life: 30
+  _canMove: 1
+  _movementSpeed: 2.5
+  _damageStunChance: 2
+  _maxStunTime: 1
+  _visionDistance: 5
+  _maxIdleTime: 1
+  _turnSpeed: 10
+  _canPatrol: 0
+  _canMeleeAttack: 1
+  _meleeDamage: 3.4
+  _attackChance: 8
+  _attackRange: 1.2
+  _attackCooldown: 1.5
+  _canRangedAttack: 0
+  _projectilePrefab: {fileID: 0}
+  _rangedDamage: 3.5
+  _rangedAttackChance: 0
+  _rangedAttackRange: 0
+  _rangedAttackCooldown: 0
+  _idleClips: []
+  _movementClips: []
+  _movementAdditionalClips:
+  - {fileID: 8300000, guid: 96dc17ebfbaf2544d86f97977655ccf2, type: 3}
+  _meleeAttackClips:
+  - {fileID: 8300000, guid: 044979896594ffc44af2e4a59d9bb0db, type: 3}
+  _meleeHitAttackClips:
+  - {fileID: 8300000, guid: 40d580fce28b25b479bf69f1e4910d43, type: 3}
+  - {fileID: 8300000, guid: e4247ccfd2a284d449ad8717d1d92b45, type: 3}
+  - {fileID: 8300000, guid: 988c1a75fa05bba48a1d01828cd224bb, type: 3}
+  - {fileID: 8300000, guid: f93622279c8c7754a9b0db886e97fde9, type: 3}
+  _rangedAttackClips: []
+  _rangedHitAttackClips: []
+  _damagedClips:
+  - {fileID: 8300000, guid: e1de9c0f227324442a58de097419b990, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: bc96cb6bcecd2904e97ab1849439482c, type: 3}

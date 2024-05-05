@@ -56,4 +56,14 @@ public class UIManager : MonoBehaviour
 
         damageImage.CrossFadeAlpha(0, 0.5f, true);
     }
+
+    public void DeathFade()
+    {
+        fadeImage.gameObject.SetActive(false);
+        damageImage.gameObject.SetActive(false);
+
+        damageImage.color = new Color(1, 0, 0, 1);
+        damageImage.gameObject.SetActive(true);
+        damageImage.CrossFadeColor(Color.black, 2, true, false);
+    }
 }

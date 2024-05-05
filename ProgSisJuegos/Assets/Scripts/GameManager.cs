@@ -5,14 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public string deathScene = "Death";
+    public string deathScene = "Death";    
+    public List<AudioClip> _deathClips;
+    public GameObject deathCam;
+
+    [SerializeField] private PlayerController _thePlayer;
+    [SerializeField] private UIManager _uiManager;
     private static AudioSource _audioSource;
-    [SerializeField] private PlayerController thePlayer;
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        thePlayer.OnPlayerDeath += OnPlayerDeath;
+        _thePlayer.OnPlayerDeath += OnPlayerDeath;
     }
 
     public void PlayUISound(AudioClip clip, float volumeScale = 1)
@@ -22,12 +26,24 @@ public class GameManager : MonoBehaviour
 
     public void GiveWeaponToPlayer(WeaponTypes type)
     {
-        thePlayer.OnGiveWeapon?.Invoke(type);
+        _thePlayer.OnGiveWeapon?.Invoke(type);
     }
 
     private void OnPlayerDeath()
     {
-        thePlayer.OnPlayerDeath -= OnPlayerDeath;
+        _audioSource.PlayOneShot(_deathClips[Random.Range(0, _deathClips.Count - 1)]);
+        _uiManager.DeathFade();
+
+        _thePlayer.OnPlayerDeath -= OnPlayerDeath;
+        _thePlayer.gameObject.SetActive(false);
+        deathCam.SetActive(true);
+
+        StartCoroutine(DeathSwitchLevel());
+    }
+
+    IEnumerator DeathSwitchLevel()
+    {
+        yield return new WaitForSeconds(2);
         StartCoroutine(GotoLevel(deathScene));
     }
 

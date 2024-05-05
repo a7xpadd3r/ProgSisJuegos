@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponKitchenKnife : MonoBehaviour
+public class WeaponKitchenKnife : WeaponBase
 {
-    [SerializeField] private WeaponDatabase _weaponData;
-
-    private AudioSource _audioSource;
-    private Animator _anim;
     public Transform forwardReference;
 
     public RaycastHit _rHit;
@@ -15,6 +11,8 @@ public class WeaponKitchenKnife : MonoBehaviour
 
     private float _currentrecoil;
     private bool _canAttackAgain = true;
+
+    public bool CanAttackAgain => _canAttackAgain;
 
     void Start()
     {
@@ -24,17 +22,14 @@ public class WeaponKitchenKnife : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _canAttackAgain)
-            Attack();
+        if (!_canAttackAgain && _currentrecoil < WeaponData.Recoil) _currentrecoil += Time.deltaTime;
+        else if (!_canAttackAgain && _currentrecoil >= WeaponData.Recoil) _canAttackAgain = true;
 
-        if (!_canAttackAgain && _currentrecoil < _weaponData.Recoil)
-            _currentrecoil += Time.deltaTime;
-
-        else if (!_canAttackAgain && _currentrecoil >= _weaponData.Recoil)
-            _canAttackAgain = true;
+        if (IsSwitchingWeapon) return;
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _canAttackAgain) Attack();
     }
 
-    public void Attack()
+    public override void Attack()
     {
         if (_canAttackAgain)
         {
@@ -45,19 +40,19 @@ public class WeaponKitchenKnife : MonoBehaviour
         }
     }
 
-    public void AttackRay()
+    public override void AttackRay()
     {
         if (Physics.Raycast(
         forwardReference.position,
         forwardReference.forward,
         out _rHit,
-        _weaponData.Range
+        WeaponData.Range
         ))
             if (_rHit.transform.gameObject.layer == LayerMask.NameToLayer("Damageable"))
             {
                 IDamageable damageable = _rHit.transform.gameObject.GetComponent<IDamageable>();
                 damageable?.AnyDamage(1);
-                _currentrecoil += _weaponData.HitRecoil;
+                _currentrecoil += WeaponData.HitRecoil;
 
                 if (_rHit.transform.gameObject.CompareTag("Enemy")) AttackHitSound();
                 else if (_rHit.transform.gameObject.CompareTag("Breakable")) AttackMissSound();
@@ -66,15 +61,13 @@ public class WeaponKitchenKnife : MonoBehaviour
         AttackMissSound();
     }
 
-    public void AttackMissSound()
+    public override void AttackMissSound()
     {
-        _audioSource.PlayOneShot(_weaponData.SoundMissAttackFire[Random.Range(0, _weaponData.SoundMissAttackFire.Count)]);        
+        _audioSource.PlayOneShot(WeaponData.SoundMissAttackFire[Random.Range(0, WeaponData.SoundMissAttackFire.Count)]);        
     }
 
-    public void AttackHitSound()
+    public override void AttackHitSound()
     {
-        _audioSource.PlayOneShot(_weaponData.SoundHitAttackFire[Random.Range(0, _weaponData.SoundHitAttackFire.Count)]);
+        _audioSource.PlayOneShot(WeaponData.SoundHitAttackFire[Random.Range(0, WeaponData.SoundHitAttackFire.Count)]);
     }
-
-    public void Reload() { }
 }

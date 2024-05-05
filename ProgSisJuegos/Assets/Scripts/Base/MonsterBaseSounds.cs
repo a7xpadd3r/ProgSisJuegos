@@ -29,7 +29,6 @@ public class MonsterBaseSounds : MonoBehaviour
 
         if (clip != null)
             _audioSource?.PlayOneShot(clip);
-
     }
 
 

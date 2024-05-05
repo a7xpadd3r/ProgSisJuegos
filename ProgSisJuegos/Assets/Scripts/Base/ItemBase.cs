@@ -13,14 +13,17 @@ public class ItemBase : MonoBehaviour, IInteractable
     public AudioClip SoundPickedUp => _pickedUpSound;
     public GameManager GManager => _manager;
 
-    public virtual void Interact()
-    {
-        _glowScript.enabled = false;
-        GManager.PlayUISound(SoundPickedUp);
-    }
-
-    private void Start()
+    void Start()
     {
         _glowScript = GetComponent<ItemLightGlow>();
+
+        if (_manager == null)
+            _manager = FindObjectOfType<GameManager>();
+    }
+
+    public virtual void Interact()
+    {
+        if (_glowScript!= null) _glowScript.enabled = false;
+        GManager?.PlayUISound(SoundPickedUp);
     }
 }

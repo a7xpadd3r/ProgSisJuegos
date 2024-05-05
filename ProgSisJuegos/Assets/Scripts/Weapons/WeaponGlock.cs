@@ -18,11 +18,37 @@ public class WeaponGlock : WeaponBase
     public GameObject muzzleLight;
     public GameObject muzzleSprite;
 
+    public bool CanShootAgain => _canShootAgain;
+    public bool IsReloading => _isReloading;
+
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _anim = GetComponent<Animator>();
         _currentBullets = WeaponData.Bullets;
+    }
+
+    void Update()
+    {
+        float delta = Time.deltaTime;
+
+        if (_currentMuzzleDuration > 0) _currentMuzzleDuration -= delta;
+
+        else
+        {
+            muzzleLight.SetActive(false);
+            muzzleSprite.SetActive(false);
+        }
+
+        if (!_canShootAgain && _currentRecoil > 0)
+            _currentRecoil -= delta;
+
+        else if (!_canShootAgain && _currentRecoil <= 0 && !_isReloading)
+            _canShootAgain = true;
+
+        if (IsSwitchingWeapon) return;
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _canShootAgain) Attack();
+        if (Input.GetKeyDown(KeyCode.R) && _currentBullets < WeaponData.Bullets) Reload();
     }
 
     public override void Attack()
@@ -83,40 +109,10 @@ public class WeaponGlock : WeaponBase
         _canShootAgain = true;
     }
 
-    void Update()
-    {
-        float delta = Time.deltaTime;
-        Debug.DrawLine(forwardReference.position, forwardReference.position + forwardReference.forward * 20, Color.green);
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _canShootAgain)
-            Attack();
-
-        if (Input.GetKeyDown(KeyCode.R) && _currentBullets < WeaponData.Bullets)
-            Reload();
-        
-        if (!_canShootAgain && _currentRecoil > 0)
-            _currentRecoil -= delta;
-
-        else if (!_canShootAgain && _currentRecoil <= 0 && !_isReloading)
-            _canShootAgain = true;
-
-        if (_currentMuzzleDuration > 0) _currentMuzzleDuration -= delta;
-        else
-        {
-            muzzleLight.SetActive(false);
-            muzzleSprite.SetActive(false);
-        }
-    }
-
     public void ActivateMuzzles()
     {
         muzzleLight.SetActive(true);
         muzzleSprite.SetActive(true);
         _currentMuzzleDuration = muzzleDuration;
-    }
-
-    public void Reset()
-    {
-        print("bullets: " + _currentBullets);
     }
 }
