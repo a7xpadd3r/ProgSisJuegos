@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c49631592e731149b8eadc7a3b6097d, type: 3}
   m_Name: MonsterGhost
   m_EditorClassIdentifier: 
+  _type: 2
+  _monsterPrefab: {fileID: 822964813, guid: 10fd7b7472f6f7f46a0c888de9c6cde8, type: 3}
   _life: 25
   _canMove: 1
   _movementSpeed: 2

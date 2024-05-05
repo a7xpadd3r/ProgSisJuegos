@@ -7,7 +7,7 @@ public enum EnemyStates
     Idle, Patrol, Persuit, Attack, RangedAttack, Damaged, Death
 }
 
-public class EnemyBase : MonoBehaviour, IDamageable
+public class EnemyBase : MonoBehaviour, IDamageable, IProduct
 {
     [Header("Monster settings")]
     [SerializeField] private MonsterDatabase _monsterData;

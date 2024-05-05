@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c49631592e731149b8eadc7a3b6097d, type: 3}
   m_Name: MonsterFaster
   m_EditorClassIdentifier: 
+  _type: 3
+  _monsterPrefab: {fileID: 2052871765, guid: 438a86b62baade24fb1103cba2b60979, type: 3}
   _life: 30
   _canMove: 1
   _movementSpeed: 2.5

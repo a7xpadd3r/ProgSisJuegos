@@ -11897,6 +11897,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.95500004, y: 2.2, z: 0}
   m_Center: {x: 0.47750002, y: 1.1, z: 0}
+--- !u!1 &1176562972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1176562973}
+  m_Layer: 0
+  m_Name: TEST
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1176562973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176562972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.023, y: 6.067, z: 12.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191949080
 GameObject:
   m_ObjectHideFlags: 0
@@ -22215,6 +22246,26 @@ PrefabInstance:
       propertyPath: _uiManager
       value: 
       objectReference: {fileID: 158746603}
+    - target: {fileID: 2174175582673442266, guid: 3ab65fcf3cf04a643810b251aa9709c6, type: 3}
+      propertyPath: _monsters.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2174175582673442266, guid: 3ab65fcf3cf04a643810b251aa9709c6, type: 3}
+      propertyPath: _monsters.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d35e3e16c43afea40847cf143ae81f1e, type: 2}
+    - target: {fileID: 2174175582673442266, guid: 3ab65fcf3cf04a643810b251aa9709c6, type: 3}
+      propertyPath: _monsters.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c0a35213471e95248a624237e1680bb0, type: 2}
+    - target: {fileID: 2174175582673442266, guid: 3ab65fcf3cf04a643810b251aa9709c6, type: 3}
+      propertyPath: _monsters.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8881bf9130e81974faa60e7928342504, type: 2}
+    - target: {fileID: 2174175582673442266, guid: 3ab65fcf3cf04a643810b251aa9709c6, type: 3}
+      propertyPath: _monsters.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 557d08a780f6a0347b4d31c92a7e4c80, type: 2}
     - target: {fileID: 2174175582673442271, guid: 3ab65fcf3cf04a643810b251aa9709c6, type: 3}
       propertyPath: m_Name
       value: Manager

@@ -5,18 +5,39 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public string deathScene = "Death";    
-    public List<AudioClip> _deathClips;
-    public GameObject deathCam;
+    [Header("Manager settings")]
+    public string deathScene = "Death";
 
+    [Header("Manager references")]
     [SerializeField] private PlayerController _thePlayer;
-    [SerializeField] private UIManager _uiManager;
+    [SerializeField] private UIManager _uiManager;    
+    [SerializeField] private GameObject deathCam;
+
+    [Header("Audio stuff")]
+    [SerializeField] private List<AudioClip> _deathClips;
     private static AudioSource _audioSource;
+
+    [Header("Factory references")]
+    [SerializeField] private List<MonsterDatabase> _monsters;
+    private FactoryMonsters _monstersFactory;
+    public Transform testingow;
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _thePlayer.OnPlayerDeath += OnPlayerDeath;
+        
+        _monstersFactory = new FactoryMonsters(_monsters);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J)) 
+        {
+            EnemyBase enemyToSpawn = _monstersFactory.CreateProduct(nameof(MonsterType.Wheelchair));
+            Debug.Log($"Trying to spawn '{enemyToSpawn}'...");
+            Instantiate(enemyToSpawn, testingow.transform.position, Quaternion.identity);
+        }
     }
 
     public void PlayUISound(AudioClip clip, float volumeScale = 1)

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c49631592e731149b8eadc7a3b6097d, type: 3}
   m_Name: MonsterWheelchair
   m_EditorClassIdentifier: 
+  _type: 0
+  _monsterPrefab: {fileID: 5648184920833725267, guid: 818f48e20317a8a4c89e6562fa0208bc, type: 3}
   _life: 8
   _canMove: 1
   _movementSpeed: 1

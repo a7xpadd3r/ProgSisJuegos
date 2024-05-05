@@ -176,6 +176,10 @@ MonoBehaviour:
   deathCam: {fileID: 2174175582505257546}
   _thePlayer: {fileID: 0}
   _uiManager: {fileID: 0}
+  _wheelchairMonsterPrefab: {fileID: 5648184920833725267, guid: 818f48e20317a8a4c89e6562fa0208bc, type: 3}
+  _spitterMonsterPrefab: {fileID: 8987135206726720932, guid: 9c166ea9eda721341a788767b9083660, type: 3}
+  _ghostMonsterPrefab: {fileID: 822964813, guid: 10fd7b7472f6f7f46a0c888de9c6cde8, type: 3}
+  _fasterMonsterPrefab: {fileID: 2052871765, guid: 438a86b62baade24fb1103cba2b60979, type: 3}
 --- !u!82 &2174175582673442265
 AudioSource:
   m_ObjectHideFlags: 0

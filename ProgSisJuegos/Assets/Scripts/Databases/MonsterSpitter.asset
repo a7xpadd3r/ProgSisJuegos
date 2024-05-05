@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c49631592e731149b8eadc7a3b6097d, type: 3}
   m_Name: MonsterSpitter
   m_EditorClassIdentifier: 
+  _type: 1
+  _monsterPrefab: {fileID: 8987135206726720932, guid: 9c166ea9eda721341a788767b9083660, type: 3}
   _life: 10
   _canMove: 0
   _movementSpeed: 1

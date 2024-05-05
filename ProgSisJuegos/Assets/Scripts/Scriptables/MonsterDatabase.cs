@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MonsterType
+{
+    Wheelchair, Spitter, Ghost, Faster
+}
+
 [CreateAssetMenu(fileName = "NewMonsterData", menuName = "Data/Monsters")]
 public class MonsterDatabase : ScriptableObject
 {
+    [SerializeField] private MonsterType _type;
+    [SerializeField] private EnemyBase _monsterPrefab;
+
     [Header("Generic settings")]
     [SerializeField, Range(1, 100)] private float _life = 1;
     [SerializeField] private bool _canMove;
@@ -44,6 +52,9 @@ public class MonsterDatabase : ScriptableObject
     [SerializeField] private List<AudioClip> _damagedClips;
     [SerializeField] private List<AudioClip> _deathClips;
 
+
+    public MonsterType EnemyType => _type;
+    public EnemyBase MonsterPrefab => _monsterPrefab;
 
     // Pawn
     public float Life => _life;
