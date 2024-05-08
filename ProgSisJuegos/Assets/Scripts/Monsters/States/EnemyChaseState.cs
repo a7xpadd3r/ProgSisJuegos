@@ -31,7 +31,9 @@ public class EnemyChaseState : EnemyStateBase
 
     public override void OnEnterState()
     {
-        if (_getPlayerDirection() == null || !_controller.PlayerNearAndLoS)
+        if (!_controller.MonsterData.IACanIdle || _getPlayerDirection() == null) return;
+
+        if (!_controller.PlayerNearAndLoS || _getPlayerDirection() == null)
             OnStateChangePetitionHandler(EnemyStates.Idle);
     }
 

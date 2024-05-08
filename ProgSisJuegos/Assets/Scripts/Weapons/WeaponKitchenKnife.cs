@@ -29,6 +29,18 @@ public class WeaponKitchenKnife : WeaponBase
         if (Input.GetKeyDown(KeyCode.Mouse0) && _canAttackAgain) Attack();
     }
 
+    private void OnEnable()
+    {
+        _canAttackAgain = true;
+        _currentrecoil = 0;
+    }
+
+    private void OnDisable()
+    {
+        _canAttackAgain = true;
+        _currentrecoil = 0;
+    }
+
     public override void Attack()
     {
         if (_canAttackAgain)

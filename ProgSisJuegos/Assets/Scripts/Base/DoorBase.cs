@@ -23,6 +23,7 @@ public class DoorBase : MonoBehaviour, IInteractable
     private float _currentSpamDelay;
 
     public event Action OnInteracted;
+    public bool IsLocked => _isLocked;
 
     private void Start()
     {
@@ -31,8 +32,6 @@ public class DoorBase : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        OnInteracted?.Invoke();
-
         if (!_transitioning && !_isLocked)
         {
             if (_isClosed)
@@ -51,7 +50,9 @@ public class DoorBase : MonoBehaviour, IInteractable
             _isClosed = !_isClosed;
         }
 
-        else if (_isLocked && !_audioSource.isPlaying)
+        OnInteracted?.Invoke();
+
+        if (_isLocked && !_audioSource.isPlaying)
             _audioSource.PlayOneShot(_lockedSfx);
     }
 

@@ -17,6 +17,7 @@ public class EnemyBase : MonoBehaviour, IDamageable, IProduct
 
     private CharacterController _characterController;
     private AudioSource _audioSource;
+    private ProjectileBase _lastProjectile;
 
     private float _currentLife;
     public List<EnemyStateBase> _enemyStates = new List<EnemyStateBase>();
@@ -30,6 +31,7 @@ public class EnemyBase : MonoBehaviour, IDamageable, IProduct
     public AudioSource SoundMainAudio => _audioSource;
     public bool PlayerNearAndLoS => IsPlayerNear();
     public bool IsAlive => _currentLife > 0;
+    public Action OnEnemyDeath;
 
     public virtual void AnyDamage(float amount)
     {
@@ -52,6 +54,7 @@ public class EnemyBase : MonoBehaviour, IDamageable, IProduct
 
     public virtual void OnDeath()
     {
+        OnEnemyDeath?.Invoke();
         UnsubscribeToStateChanges();
         HandleStateChange(EnemyStates.Death);
         _characterController.enabled = false;
@@ -71,6 +74,9 @@ public class EnemyBase : MonoBehaviour, IDamageable, IProduct
         _currentLife = MonsterData.Life;
         _enemyStates = new List<EnemyStateBase>();
         InitializeStates();
+
+        if (_thePlayer == null)
+            _thePlayer = GameObject.FindWithTag("Player");
     }
 
     public virtual void InitializeStates()
@@ -261,17 +267,34 @@ public class EnemyBase : MonoBehaviour, IDamageable, IProduct
     {
         if (UnityEngine.Random.Range(0.1f, 10) > MonsterData.RangedAttackChance) return false;
 
-        var projectile = Instantiate(MonsterData.ProjectilePrefab, _projectileOut.position, _projectileOut.rotation);
-        projectile.TryGetComponent(out ProjectileBase projectileScript);
-
-        if (projectileScript != null)
+        if (_lastProjectile == null)
         {
-            projectileScript.direction = (_thePlayer.transform.position - transform.position).normalized;
-            projectileScript.damage = MonsterData.DamageRanged;
-            return true;
+            var projectile = Instantiate(MonsterData.ProjectilePrefab, _projectileOut.position, _projectileOut.rotation);
+            projectile.TryGetComponent(out ProjectileBase projectileScript);
+
+            if (projectileScript != null)
+            {
+                projectileScript.direction = (_thePlayer.transform.position - transform.position).normalized;
+                projectileScript.damage = MonsterData.DamageRanged;
+                return true;
+            }
+
+            _lastProjectile = projectile.GetComponent<ProjectileBase>();
         }
 
+        else
+            Instantiate(GetLatestProjectileInfoClone(), _projectileOut.position, _projectileOut.rotation);
+
         return false;
+    }
+
+    private ProjectileBase GetLatestProjectileInfoClone()
+    {
+        var newProjectile = Cloner.CloneObject(_lastProjectile);
+
+        if (newProjectile is ProjectileBase castedProjectile)
+            return castedProjectile;
+        return null;
     }
     
 }

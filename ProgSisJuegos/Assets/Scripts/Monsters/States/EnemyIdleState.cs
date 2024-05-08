@@ -1,6 +1,4 @@
 using System;
-using System.Diagnostics;
-using System.Drawing.Printing;
 using UnityEngine;
 
 public class EnemyIdleState : EnemyStateBase
@@ -19,6 +17,9 @@ public class EnemyIdleState : EnemyStateBase
 
     public override void OnEnterState()
     {
+        if (!_controller.MonsterData.IACanIdle)
+            OnStateChangePetitionHandler(EnemyStates.Persuit);
+
         _idleTimer = 0;
         _getAnimator()?.SetBool("Walking", false);
     }
@@ -26,6 +27,13 @@ public class EnemyIdleState : EnemyStateBase
     public override void OnExecute(float deltaTime, float turnSpeed = 1)
     {
         _idleTimer += deltaTime;
+
+        // If monster can't idle, then try persuit
+        if (!_controller.MonsterData.IACanIdle)
+        {
+            OnStateChangePetitionHandler(EnemyStates.Persuit);
+            return;
+        }
 
         if (_controller.PlayerNearAndLoS)
         {

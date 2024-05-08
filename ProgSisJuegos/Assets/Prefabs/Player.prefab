@@ -2069,7 +2069,7 @@ PrefabInstance:
     - target: {fileID: 1799080164082527961, guid: bea6735453d07634ea25577759582d18, type: 3}
       propertyPath: forwardReference
       value: 
-      objectReference: {fileID: 6333968975476066473}
+      objectReference: {fileID: 1563941609}
     - target: {fileID: 1799080164082527961, guid: bea6735453d07634ea25577759582d18, type: 3}
       propertyPath: _hitAttackClips.Array.size
       value: 2
@@ -2169,11 +2169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878a9affcbdcfe6459e9f4d89265f47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &6333968975476066473 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7078869825880911183, guid: bea6735453d07634ea25577759582d18, type: 3}
-  m_PrefabInstance: {fileID: 3880965573991228902}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &8906653649128813262 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5638858497639978792, guid: bea6735453d07634ea25577759582d18, type: 3}

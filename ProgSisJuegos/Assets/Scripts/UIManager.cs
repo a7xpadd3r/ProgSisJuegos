@@ -4,18 +4,30 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Image fadeImage;
-    public Image damageImage;
-    public PlayerController thePlayer;
+    [SerializeField] private Image fadeImage;
+    [SerializeField] private Image damageImage;
+    [SerializeField] private PlayerController thePlayer;
 
     public Action<bool, float, Color> OnCameraFade;
     public Action<Color> OnForcedQuickFade;
+    public Action OnDeathFade;
 
-    private void Start()
+    private void Awake()
     {
         OnCameraFade += Fade;
         OnForcedQuickFade += SnapFade;
+        OnDeathFade += DeathFade;
+
         thePlayer.OnAnyDamage += DamageFade;
+    }
+
+    private void OnDestroy()
+    {
+        OnCameraFade -= Fade;
+        OnForcedQuickFade -= SnapFade;
+        OnDeathFade -= DeathFade;
+
+        thePlayer.OnAnyDamage -= DamageFade;
     }
 
     private void SnapFade(Color color)
@@ -45,7 +57,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void DamageFade(float amount)
+    private void DamageFade(float amount)
     {
         damageImage.CrossFadeAlpha(0.2f, 0f, true);
 
@@ -57,7 +69,7 @@ public class UIManager : MonoBehaviour
         damageImage.CrossFadeAlpha(0, 0.5f, true);
     }
 
-    public void DeathFade()
+    private void DeathFade()
     {
         fadeImage.gameObject.SetActive(false);
         damageImage.gameObject.SetActive(false);

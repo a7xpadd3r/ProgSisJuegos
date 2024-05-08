@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class ItemBase : MonoBehaviour, IInteractable
     public AudioClip SoundPickedUp => _pickedUpSound;
     public GameManager GManager => _manager;
 
+    public Action OnInteracted;
+
     void Start()
     {
         _glowScript = GetComponent<ItemLightGlow>();
@@ -23,6 +26,7 @@ public class ItemBase : MonoBehaviour, IInteractable
 
     public virtual void Interact()
     {
+        OnInteracted?.Invoke();
         if (_glowScript!= null) _glowScript.enabled = false;
         GManager?.PlayUISound(SoundPickedUp);
     }

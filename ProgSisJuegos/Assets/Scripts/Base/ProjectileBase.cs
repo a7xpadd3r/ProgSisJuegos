@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ProjectileBase : MonoBehaviour
+public class ProjectileBase : MonoBehaviour, ICloneable
 {
     public float damage;
     [SerializeField, Range(1, 3)] private float life = 1;
@@ -16,6 +16,21 @@ public class ProjectileBase : MonoBehaviour
 
     Coroutine _destroyTimer;
     public bool IsCooldown => _destroyTimer != null;
+
+    public ProjectileBase()
+    {
+
+    }
+
+    public ProjectileBase(float damage, float life, float speed, float speedDesviation, float directionDesviation, float fixHeight)
+    {
+        this.damage = damage;
+        this.life = life;
+        this.speed = speed;
+        _speedDesviation = speedDesviation;
+        _directionDesviation = directionDesviation;
+        _fixHeight = fixHeight;
+    }
 
     private void Start()
     {
@@ -43,5 +58,11 @@ public class ProjectileBase : MonoBehaviour
 
         if (life <= 0)
             Destroy(this.gameObject);
+    }
+
+    public ICloneable Clone()
+    {
+        var newProjectile = new ProjectileBase();
+        return newProjectile;
     }
 }

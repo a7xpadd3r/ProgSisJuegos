@@ -129,9 +129,10 @@ GameObject:
   - component: {fileID: 2174175582673442264}
   - component: {fileID: 2174175582673442266}
   - component: {fileID: 2174175582673442265}
+  - component: {fileID: 2106368304311099952}
   m_Layer: 0
   m_Name: Manager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,6 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathScene: Death
+  _thePlayer: {fileID: 0}
+  _uiManager: {fileID: 0}
+  deathCam: {fileID: 2174175582505257546}
   _deathClips:
   - {fileID: 8300000, guid: 95a59216931d63b498caefb854302612, type: 3}
   - {fileID: 8300000, guid: db7478bcdb3030c4bac0512332b17c4d, type: 3}
@@ -173,13 +177,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 595678a9302f14242a72e752ddd890ca, type: 3}
   - {fileID: 8300000, guid: d58a6a9ca3b54274aa0a2bea24c464d7, type: 3}
   - {fileID: 8300000, guid: 32da31fcc2d3f524c91ae03a4c1a26f0, type: 3}
-  deathCam: {fileID: 2174175582505257546}
-  _thePlayer: {fileID: 0}
-  _uiManager: {fileID: 0}
-  _wheelchairMonsterPrefab: {fileID: 5648184920833725267, guid: 818f48e20317a8a4c89e6562fa0208bc, type: 3}
-  _spitterMonsterPrefab: {fileID: 8987135206726720932, guid: 9c166ea9eda721341a788767b9083660, type: 3}
-  _ghostMonsterPrefab: {fileID: 822964813, guid: 10fd7b7472f6f7f46a0c888de9c6cde8, type: 3}
-  _fasterMonsterPrefab: {fileID: 2052871765, guid: 438a86b62baade24fb1103cba2b60979, type: 3}
+  _monsters:
+  - {fileID: 11400000, guid: d35e3e16c43afea40847cf143ae81f1e, type: 2}
+  - {fileID: 11400000, guid: c0a35213471e95248a624237e1680bb0, type: 2}
+  - {fileID: 11400000, guid: 8881bf9130e81974faa60e7928342504, type: 2}
+  - {fileID: 11400000, guid: 557d08a780f6a0347b4d31c92a7e4c80, type: 2}
+  testingow: {fileID: 0}
 --- !u!82 &2174175582673442265
 AudioSource:
   m_ObjectHideFlags: 0
@@ -276,3 +279,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2106368304311099952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2174175582673442271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde48df63e99a9b40a3abce525b031fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 3
   _monsterPrefab: {fileID: 2052871765, guid: 438a86b62baade24fb1103cba2b60979, type: 3}
-  _life: 30
+  _life: 35
   _canMove: 1
   _movementSpeed: 2.5
   _damageStunChance: 2
   _maxStunTime: 1
-  _visionDistance: 5
-  _maxIdleTime: 1
+  _visionDistance: 82.3
+  _maxIdleTime: 0.1
   _turnSpeed: 10
+  _canIdle: 0
   _canPatrol: 0
   _canMeleeAttack: 1
   _meleeDamage: 3.4

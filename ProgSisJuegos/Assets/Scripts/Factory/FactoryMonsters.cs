@@ -5,6 +5,7 @@ using UnityEngine;
 public class FactoryMonsters : AbstractFactory<EnemyBase>
 {
     private Dictionary<string, EnemyBase> _availableMonsters = new Dictionary<string, EnemyBase>();
+
     public FactoryMonsters(List<MonsterDatabase> monstersList) 
     {
         foreach (MonsterDatabase monster in monstersList)

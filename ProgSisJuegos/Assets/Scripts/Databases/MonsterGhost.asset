@@ -17,8 +17,8 @@ MonoBehaviour:
   _life: 25
   _canMove: 1
   _movementSpeed: 2
-  _damageStunChance: 3.5
-  _maxStunTime: 1
+  _damageStunChance: 0
+  _maxStunTime: 0.1
   _visionDistance: 8
   _maxIdleTime: 1
   _turnSpeed: 4

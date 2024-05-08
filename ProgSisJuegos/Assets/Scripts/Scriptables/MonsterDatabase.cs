@@ -21,9 +21,10 @@ public class MonsterDatabase : ScriptableObject
     [SerializeField, Range(0.1f, 10f)] private float _maxStunTime = 1;
 
     [Header("IA Settings")]
-    [SerializeField, Range(1, 20)] private float _visionDistance = 5;
+    [SerializeField, Range(1, 100)] private float _visionDistance = 5;
     [SerializeField, Range(0.1f, 2f)] private float _maxIdleTime = 1;
     [SerializeField, Range(0.1f, 10)] private float _turnSpeed = 1;
+    [SerializeField] private bool _canIdle = true;
     [SerializeField] private bool _canPatrol;
 
     [Header("Melee settings")]
@@ -68,6 +69,7 @@ public class MonsterDatabase : ScriptableObject
     public float IATurnSpeed => _turnSpeed;
     public bool IACanMove => _canMove;
     public bool IACanPatrol => _canPatrol;
+    public bool IACanIdle => _canIdle;
     public bool IACanUseMeleeAttack => _canMeleeAttack;
     public bool IACanUseRangedAttack => _canRangedAttack;
 

@@ -26,6 +26,22 @@ public class WeaponGlock : WeaponBase
         _audioSource = GetComponent<AudioSource>();
         _anim = GetComponent<Animator>();
         _currentBullets = WeaponData.Bullets;
+
+        
+    }
+
+    private void OnEnable()
+    {
+        _isReloading = false;
+        muzzleLight.SetActive(false);
+        muzzleSprite.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        _isReloading = false;
+        muzzleLight.SetActive(false);
+        muzzleSprite.SetActive(false);
     }
 
     void Update()

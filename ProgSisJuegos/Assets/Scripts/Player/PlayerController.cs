@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 {
     [Header("Settings")]
     [SerializeField] private float _life = 15;
+    private float _currentLife;
     [SerializeField, Range(1, 5)] private float speed = 15;
     [SerializeField, Range(1, 1000)] private float mouseSensibility = 400;
     [SerializeField] private LayerMask interactionMask;
@@ -54,10 +55,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     private WeaponSwitchStatus _switchStatus = WeaponSwitchStatus.None;
     
     private AudioSource _heartBeatLoopSound;
-    private float _xRot;
-    private float _currentLife;
     private Transform _cameraTransform;
     private RaycastHit _rHit;
+    private float _xRot;
 
     private bool _lIsPlayerEnabled = true;
 
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
 
-        OnGiveWeapon += GiveWeapon;        
+        OnGiveWeapon += GiveWeapon;
     }
 
     private void Update()
@@ -177,7 +177,6 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void AnyDamage(float amount)
     {
-        OnAnyDamage(amount);
         _currentLife -= amount;
 
         if (_currentLife <= 0)
@@ -186,6 +185,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             return;
         }
 
+        OnAnyDamage(amount);
         _extraAudioSource.PlayOneShot(_gettingDamageClips[UnityEngine.Random.Range(0, _gettingDamageClips.Count -1)]);
 
         if (_currentLife <= 5 && !_heartBeatLoopSound.isPlaying) _heartBeatLoopSound.Play();
@@ -282,8 +282,6 @@ public class PlayerController : MonoBehaviour, IDamageable
                 break;
             case WeaponTypes.Glock:
                 _isGlockEnabled = true;
-                break;
-            default:
                 break;
         }
 
