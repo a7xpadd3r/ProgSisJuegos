@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef895c0ceeade3c4595279ec5439c460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemData: {fileID: 11400000, guid: 40dbe6d3c014370468bed34eeb15ad34, type: 2}
   _manager: {fileID: 0}
-  _pickedUpSound: {fileID: 8300000, guid: fb7c0c291ffc05041b28ba98c2171fdc, type: 3}
   _triggerSequence: 0
   rockletsSequencer: {fileID: 0}

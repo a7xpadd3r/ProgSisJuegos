@@ -9,6 +9,13 @@ public class MenuScript : MonoBehaviour
     public string newGameScene = "Introduction";
     public string tryAgainScene = "Gameplay";
 
+    private void Start()
+    {
+        // Hide and lock mouse to game
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+
     public void ButtonStartGame()
     {
         StartCoroutine(GotoLevel(newGameScene));

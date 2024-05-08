@@ -49,12 +49,17 @@ public class GameManager : MonoBehaviour
         _audioSource.PlayOneShot(clip, volumeScale);
     }
 
+    public void OnPillsGrab(ItemPills pillRef)
+    {
+        _thePlayer?.AnyDamage(-pillRef.ItemData.HealAmount);
+    }
+
     public void GiveWeaponToPlayer(WeaponTypes type)
     {
         _thePlayer.OnGiveWeapon?.Invoke(type);
     }
 
-    // Locked doors
+    // Locked door
 
     public void OnPlayerKeyGrab(string id)
     {

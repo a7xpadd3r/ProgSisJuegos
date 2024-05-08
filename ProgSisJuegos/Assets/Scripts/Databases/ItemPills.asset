@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 0
   _pickedUpSound: {fileID: 8300000, guid: fd4db68dfc900a74ebde1c67490c9a08, type: 3}
-  _healAmount: 8
+  _healAmount: 12

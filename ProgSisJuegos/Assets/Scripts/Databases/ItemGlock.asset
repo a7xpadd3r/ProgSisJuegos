@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ItemGlock
   m_EditorClassIdentifier: 
   _itemType: 3
-  _pickedUpSound: {fileID: 0}
+  _pickedUpSound: {fileID: 8300000, guid: f729920eaf5ae4b4bb883d65d3c18440, type: 3}
   _healAmount: 0

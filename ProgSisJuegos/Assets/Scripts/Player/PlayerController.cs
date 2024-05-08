@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     public Action<WeaponTypes> OnGiveWeapon;
     public Action OnPlayerDeath;
 
+    public bool IsPlayerEnabled => _lIsPlayerEnabled;
+
     private void Start()
     {
         _currentWeaponSwitchTime = _weaponSwitchTime;
@@ -186,6 +188,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
 
         OnAnyDamage(amount);
+        if (amount < 0) return; // Pills
+
         _extraAudioSource.PlayOneShot(_gettingDamageClips[UnityEngine.Random.Range(0, _gettingDamageClips.Count -1)]);
 
         if (_currentLife <= 5 && !_heartBeatLoopSound.isPlaying) _heartBeatLoopSound.Play();

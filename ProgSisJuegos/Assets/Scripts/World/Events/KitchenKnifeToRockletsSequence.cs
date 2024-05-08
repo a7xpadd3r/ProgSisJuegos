@@ -16,6 +16,8 @@ public class KitchenKnifeToRockletsSequence : MonoBehaviour
     public Transform rocketsDestination;
     public UIManager uiManager;
 
+    public GameObject controlsKitchenKnife;
+
     [Header("Mini sequence")]
     public bool startFadeOut;
     public float timeBeforeFadeOut = 9;
@@ -78,6 +80,8 @@ public class KitchenKnifeToRockletsSequence : MonoBehaviour
         thePlayer.gameObject.SetActive(true);
         rockletCamera.gameObject.SetActive(false);
         kitchenKnifeScript.Interact();
+
+        controlsKitchenKnife.SetActive(true);
         Destroy(this.gameObject);
     }
 }

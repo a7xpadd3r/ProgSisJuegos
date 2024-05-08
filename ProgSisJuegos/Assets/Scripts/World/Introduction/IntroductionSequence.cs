@@ -11,6 +11,7 @@ public class IntroductionSequence : MonoBehaviour
     public Image fadeImage;
     public Light bathroomLight;
     public GameObject thePlayer;
+    public PlayerController pController;
     public GameObject theMannequin;
     public UIManager uiManager;
 
@@ -68,6 +69,7 @@ public class IntroductionSequence : MonoBehaviour
         if (_currentIndex >= positions.Count && !_mainSeqEnded)
         {
             uiManager.OnCameraFade(false, fadeOutTime, _fadeColor);
+            pController.LightDisable(true);
             _mainSeqEnded = true;
             return;
         }

@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
         if (amount > 0)
             damageImage.color = new Color(1, 0, 0, 0.2f);
         else
-            damageImage.color = new Color(0, 1, 0, 0.2f);
+            damageImage.color = new Color(0, 0.65f, 0, 0.6f);
 
         damageImage.CrossFadeAlpha(0, 0.5f, true);
     }

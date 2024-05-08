@@ -5,16 +5,16 @@ using UnityEngine;
 public class ItemBase : MonoBehaviour, IInteractable
 {
     [Header("References")]
+    [SerializeField] private ItemDatabase _itemData;
     [SerializeField] private GameManager _manager;
     private ItemLightGlow _glowScript;
 
-    [Header("Settings")]
-    [SerializeField] private AudioClip _pickedUpSound;
-
-    public AudioClip SoundPickedUp => _pickedUpSound;
+    public AudioClip SoundPickedUp => _itemData.SoundPickedUp;
     public GameManager GManager => _manager;
 
+    public ItemDatabase ItemData => _itemData;
     public Action OnInteracted;
+
 
     void Start()
     {
